@@ -9,7 +9,11 @@
 
 
  // Creazione della connessione
- $conn = new mysqli($serverName, $username, $password, $db_name);
+ $conn = mysqli_connect($serverName, $username, $password, $db_name);  // Ritorna un oggetto msql che rappresenta la connessione al server
+
+  if(!$conn){
+     die("Connection failed: " . mysqli_connect_error());
+  }
 
     if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['Re_password']) && isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['data_nascita']) && isset($_POST['codiceFiscale'])){
 
