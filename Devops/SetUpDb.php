@@ -151,16 +151,16 @@ if ($conn2->query($sql)) {
 }
 
 $sql = "INSERT INTO utenti (codiceFiscale, nome, cognome, data_nascita, email, password) VALUES
-('RSSMRA85M01H501Z', 'Mario', 'Rossi', '1985-01-01', 'mario.rossi@gmail.com', 'password1'),
-('VRNGNN90A01H501Y', 'Giovanni', 'Verdi', '1990-02-15', 'giovanni.verdi@gmail.com', 'password2'),
-('BNCMRA75D01H501X', 'Anna', 'Bianchi', '1975-03-20', 'anna.bianchi@gmail.com', 'password3'),
-('CMLFNC80B01H501W', 'Francesca', 'Colombo', '1980-04-25', 'francesca.colombo@gmail.com', 'password4'),
-('DLMNMR85C01H501V', 'Luca', 'De Luca', '1985-05-30', 'luca.deluca@gmail.com', 'password5'),
-('FRTGNN92E01H501U', 'Marco', 'Ferrari', '1992-06-10', 'marco.ferrari@gmail.com', 'password6'),
-('PLMZRT88F01H501T', 'Elena', 'Pellegrini', '1988-07-15', 'elena.pellegrini@gmail.com', 'password7'),
-('GHTMRA80G01H501S', 'Simone', 'Gatti', '1980-08-20', 'simone.gatti@gmail.com', 'password8'),
-('RNGNMR76H01H501R', 'Chiara', 'Rinaldi', '1976-09-25', 'chiara.rinaldi@gmail.com', 'password9'),
-('TSTLRA83I01H501Q', 'Alessandro', 'Tosi', '1983-10-30', 'alessandro.tosi@gmail.com', 'password10'); ";
+('RSSMRA85M01H501Z', 'Mario', 'Rossi', '1985-01-01', 'mario.rossi@gmail.com', '7c6a180b36896a0a8c02787eeafb0e4c'),
+('VRNGNN90A01H501Y', 'Giovanni', 'Verdi', '1990-02-15', 'giovanni.verdi@gmail.com', '6cb75f652a9b52798eb6cf2201057c73'),
+('BNCMRA75D01H501X', 'Anna', 'Bianchi', '1975-03-20', 'anna.bianchi@gmail.com', '819b0643d6b89dc9b579fdfc9094f28e'),
+('CMLFNC80B01H501W', 'Francesca', 'Colombo', '1980-04-25', 'francesca.colombo@gmail.com', '34cc93ece0ba9e3f6f235d4af979b16c'),
+('DLMNMR85C01H501V', 'Luca', 'De Luca', '1985-05-30', 'luca.deluca@gmail.com', 'db0edd04aaac4506f7edab03ac855d56'),
+('FRTGNN92E01H501U', 'Marco', 'Ferrari', '1992-06-10', 'marco.ferrari@gmail.com', '218dd27aebeccecae69ad8408d9a36bf'),
+('PLMZRT88F01H501T', 'Elena', 'Pellegrini', '1988-07-15', 'elena.pellegrini@gmail.com', '00cdb7bb942cf6b290ceb97d6aca64a3'),
+('GHTMRA80G01H501S', 'Simone', 'Gatti', '1980-08-20', 'simone.gatti@gmail.com', 'b25ef06be3b6948c0bc431da46c2c738'),
+('RNGNMR76H01H501R', 'Chiara', 'Rinaldi', '1976-09-25', 'chiara.rinaldi@gmail.com', '5d69dd95ac183c9643780ed7027d128a'),
+('TSTLRA83I01H501Q', 'Alessandro', 'Tosi', '1983-10-30', 'alessandro.tosi@gmail.com', '87e897e3b54a405da144968b2ca19b45'); ";
 
 if ($conn2->query($sql)) {
     echo "Dati \"utenti\" creati con successo<br>";
