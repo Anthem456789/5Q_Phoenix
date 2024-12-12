@@ -10,8 +10,13 @@
 
 
 
- // Creazione della connessione
- $conn = new mysqli($serverName, $username, $password, $db_name);
+ $conn = mysqli_connect($serverName, $username, $password, $db_name);  // Ritorna un oggetto msql che rappresenta la connessione al server
+
+   if(!$conn){
+    die("Connection failed: " . mysqli_connect_error());
+      }
+ 
+
 
  /* Get è una richiesta o un invio dati fatta al server web o al pc stesso, dove i parametri sono incorporati dentro alla richiesta stessa. E' più sicuro rispetto al GET */
     if(isset($_POST['email']) && isset($_POST['password'])){
@@ -38,13 +43,13 @@
         exit();    
       }else{
       
-      //funzione per trasformare la password in valori hash
-      $pass = md5($pass);
+      /* funzione per trasformare la password in valori hash */
+      //$pass = md5($pass); da riattivare dopo fase testing
       
       $sql = "SELECT * FROM utenti WHERE email='$email' AND password='$pass'";
       //  restituirà un oggetto mysqli_result. Per altre domande/query riuscite, darà true, in caso di errore false. $conn è la variabile che rappresenta la connessione(si veda db_coonection.php)
-      $result = mysqli_query($conn, $sql);  
 
+      $result = $conn->query($sql);
       if(mysqli_num_rows($result) === 1){
          //Restituisce un array di stringhe che rappresentano la riga recuperata. Se non ci sono più righe nel set di risultati darà NULL
          $row = mysqli_fetch_assoc($result); 
@@ -53,7 +58,7 @@
             $_SESSION["nome"] = $row["nome"];
             $_SESSION["cognome"] = $row["cognome"];
             $_SESSION["id"] = $row["id"];
-            $_SESSION["data_nascita"] = $row["categoria"];
+            $_SESSION["data_nascita"] = $row["data_nascita"];
             header("Location: ../Home.php");
             exit();
          }else{ 
