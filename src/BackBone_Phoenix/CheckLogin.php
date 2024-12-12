@@ -44,7 +44,7 @@
       }else{
       
       /* funzione per trasformare la password in valori hash */
-      //$pass = md5($pass); da riattivare dopo fase testing
+      $pass = md5($pass);
       
       $sql = "SELECT * FROM utenti WHERE email='$email' AND password='$pass'";
       //  restituirà un oggetto mysqli_result. Per altre domande/query riuscite, darà true, in caso di errore false. $conn è la variabile che rappresenta la connessione(si veda db_coonection.php)
