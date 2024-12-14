@@ -2,9 +2,9 @@
 
 
 $serverName = "localhost";
-$username = "root"; 
-$password = ""; 
-$db_name = "5q_ombrello_phoenix"; 
+$username = "root";
+$password = "";
+$db_name = "5q_ombrello_phoenix";
 
 
 
@@ -95,6 +95,62 @@ if ($conn2->query($sql)) {
 /* ---------------------------------------------------- */
 
 
+$sql = " CREATE TABLE IF NOT EXISTS Reparto (
+    id_reparto INT(6) NOT NULL,
+    id_malattia int(6) NOT NULL,
+    nome_reparto VARCHAR(30) NOT NULL,
+    CONSTRAINT ChiavePrimariaReparto PRIMARY KEY(id_reparto),
+    CONSTRAINT FK_idMalattia FOREIGN KEY(id_malattia)
+            REFERENCES Patologia(id_malattia)
+);";
+
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Reparto\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
+
+
+/* ---------------------------------------------------- */
+
+$sql = " CREATE TABLE IF NOT EXISTS Letto (
+    id_letto INT(6) NOT NULL,
+    isTaken BOOLEAN NOT NULL,
+    CONSTRAINT ChiavePrimariaLetto PRIMARY KEY(id_letto)
+);";
+
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Letto\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
+
+
+/* ---------------------------------------------------- */
+
+$sql = " CREATE TABLE IF NOT EXISTS Reparto_Letto (
+    id_reparto INT(6) NOT NULL,
+    id_letto INT(6) NOT NULL,
+   CONSTRAINT ChiavePrimariaRepartoLetto PRIMARY KEY(id_reparto,id_letto),
+   CONSTRAINT FK_IdReparto_Reparto FOREIGN KEY(id_reparto)
+        REFERENCES Reparto(id_reparto),
+    CONSTRAINT FK_IdLetto_Letto FOREIGN KEY(id_letto)
+        REFERENCES Letto(id_letto)
+);";
+
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Reparto_Letto\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
+
+
+/* ---------------------------------------------------- */
+
+
 $sql = " CREATE TABLE IF NOT EXISTS utenti_ruoli (
     codiceFiscale VARCHAR(20) NOT NULL,
     id_ruoli INT(6) NOT NULL,
@@ -137,7 +193,7 @@ if ($conn2->query($sql)) {
 }
 
 
-/* ---------------------------------------------------- */
+/* ----------Inserimento Dati Significativi--------------- */
 
 $sql = "INSERT INTO Ruoli (tipoRuolo, id_ruoli) VALUES
 ('Dottore', 1),
@@ -145,10 +201,13 @@ $sql = "INSERT INTO Ruoli (tipoRuolo, id_ruoli) VALUES
 ('Paziente', 3);
 ";
 if ($conn2->query($sql)) {
-    echo "Tabella \"Patologia_Documenti\" creati con successo<br>";
+    echo "Dati
+     \"Ruoli\" creati con successo<br>";
 } else {
     echo $conn->error;
 }
+
+/* ---------------------------------------------------- */
 
 $sql = "INSERT INTO utenti (codiceFiscale, nome, cognome, data_nascita, email, password) VALUES
 ('RSSMRA85M01H501Z', 'Mario', 'Rossi', '1985-01-01', 'mario.rossi@gmail.com', '7c6a180b36896a0a8c02787eeafb0e4c'),
@@ -168,6 +227,8 @@ if ($conn2->query($sql)) {
     echo $conn->error;
 }
 
+/* ---------------------------------------------------- */
+
 $sql = "INSERT INTO Documenti (id_documento, codiceFiscale) VALUES
 (1, 'RSSMRA85M01H501Z'),
 (2, 'VRNGNN90A01H501Y'),
@@ -185,6 +246,8 @@ if ($conn2->query($sql)) {
 } else {
     echo $conn->error;
 }
+
+/* ---------------------------------------------------- */
 
 $sql = "INSERT INTO Patologia (id_malattia) VALUES
 (1),
@@ -206,6 +269,7 @@ if ($conn2->query($sql)) {
     echo $conn->error;
 }
 
+/* ---------------------------------------------------- */
 
 $sql = "INSERT INTO utenti_ruoli (codiceFiscale, id_ruoli) VALUES
 ('RSSMRA85M01H501Z', 1),
@@ -225,6 +289,8 @@ if ($conn2->query($sql)) {
     echo $conn->error;
 }
 
+/* ---------------------------------------------------- */
+
 $sql = "INSERT INTO Patologia_Documenti (id_documento, id_malattia, codiceFiscale) VALUES
 (1, 1, 'RSSMRA85M01H501Z'),
 (2, 2, 'TSTLRA83I01H501Q'); ";
@@ -234,4 +300,45 @@ if ($conn2->query($sql)) {
 } else {
     echo $conn->error;
 }
-?>
+
+/* ---------------------------------------------------- */
+
+$sql = "INSERT INTO Reparto (id_reparto, id_malattia, nome_reparto) VALUES
+(1, 1, 'Oncologia'),
+(2, 2, 'Neurologia'),
+(3, 3, 'Cardiologia'),
+(4, 4, 'Dermatologia')";
+
+if ($conn2->query($sql)) {
+    echo "Dati inseriti nella tabella \"Reparto\" con successo<br>";
+} else {
+    echo $conn2->error;
+}
+
+/* ---------------------------------------------------- */
+
+$sql = "INSERT INTO Letto (id_letto, isTaken) VALUES
+(1, TRUE),
+(2, TRUE),
+(3, FALSE),
+(4, FALSE)";
+
+if ($conn2->query($sql)) {
+    echo "Dati inseriti nella tabella \"Letto\" con successo<br>";
+} else {
+    echo $conn2->error;
+}
+
+/* ---------------------------------------------------- */
+
+$sql = "INSERT INTO Reparto_Letto (id_reparto, id_letto) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(3, 4)";
+
+if ($conn2->query($sql)) {
+    echo "Dati inseriti nella tabella \"Reparto_Letto\" con successo<br>";
+} else {
+    echo $conn2->error;
+}
