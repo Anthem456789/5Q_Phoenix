@@ -57,7 +57,7 @@
             $_SESSION["email"] = $row["email"];
             $_SESSION["nome"] = $row["nome"];
             $_SESSION["cognome"] = $row["cognome"];
-            $_SESSION["id"] = $row["id"];
+            $_SESSION["codiceFiscale"] = $row["codiceFiscale"];
             $_SESSION["data_nascita"] = $row["data_nascita"];
             header("Location: ../Home.php");
             exit();
