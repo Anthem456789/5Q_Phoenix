@@ -7,8 +7,6 @@
  $db_name = "5q_ombrello_phoenix"; 
 
 
-
- // Creazione della connessione
  $conn = mysqli_connect($serverName, $username, $password, $db_name);  // Ritorna un oggetto msql che rappresenta la connessione al server
 
   if(!$conn){
@@ -17,10 +15,10 @@
 
     if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['Re_password']) && isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['data_nascita']) && isset($_POST['codiceFiscale'])){
 
-     // funzione che rimuove tutte le "imperfezioni" dalla stringa
+     /* funzione che rimuove tutte le "imperfezioni" dalla stringa */
      function test_input($var){ 
         $var = trim($var); // rimuove gli spazi all'inizio e alla fine di una stringa 
-        $var = stripcslashes($var); //rimuove gli backslash
+        $var = stripcslashes($var); // rimuove gli backslash
         $var = htmlspecialchars($var, ENT_QUOTES, 'UTF-8');  // Converte sia i doppi apici che gli apici singoli in entità HTML.
          return $var;
        }
@@ -32,7 +30,7 @@
         $maiuscole = 0;
 
         for($i = 0; $i<strlen($var1); $i++){
-          //ord converte in codice ASCII
+          /* ord converte in codice ASCII */
           $ascii = ord($var1[$i]);
 
          if($ascii >= ord('0') && $ascii <= ord('9')){$numero++;}
@@ -55,7 +53,7 @@
     $cognome = test_input($_POST["cognome"]);
     $data_nascita = test_input($_POST["data_nascita"]);
     $codiceFiscale = test_input($_POST["codiceFiscale"]);
-    $categ = test_input($_POST["gender"]);
+    $idRuolo = test_input($_POST["professione"]);
 
     $_SESSION["nome"] = $nom;
     $_SESSION["pass"] = $pass;
@@ -93,18 +91,19 @@
       }else if($pass !== $Re_pass){ 
          header("Location: ../SignUp.php?error=Le due password non corrispondono!");
          exit();
-      }else if(empty($categ)){
-        header("Location: ../SignUp.php?error=Inserisci la tua categoria!");
+      }else if(empty($idRuolo)){
+        header("Location: ../SignUp.php?error=Inserisci il tuo ruolo!");
         exit();
       } else{
       
-      //funzione per trasformare la password in valori hash
+      /* funzione per trasformare la password in valori hash */
        $pass = md5($pass);
 
       $sql = "SELECT * FROM utenti WHERE email='$email' ";
-      //  restituirà un oggetto mysqli_result. Per altre domande/query riuscite, darà true, in caso di errore false. $conn è la variabile che rappresenta la connessione(si veda db_coonection.php)
-      $result = mysqli_query($conn, $sql);  
-      //verifica che non ci siano email uguali
+      /* restituirà un oggetto mysqli_result. Per altre domande/query riuscite, darà true, in caso di errore false. */
+      $result = mysqli_query($conn, $sql); 
+       
+      /* verifica che non ci siano email uguali */
       if(mysqli_num_rows($result) > 0){
          header("Location: ../SignUp.php?error= Email già esistente, inseriscine un'altra");
          exit();
@@ -115,7 +114,7 @@
 
        if($result2){
 
-         $sql3 = "INSERT INTO utenti_ruoli(codiceFiscale, id_ruoli) VALUES('$codiceFiscale','$categ')";
+         $sql3 = "INSERT INTO utenti_ruoli(codiceFiscale, id_ruoli) VALUES('$codiceFiscale','$idRuolo')";
          $result3 = mysqli_query($conn, $sql3);
          header("Location: ../Login.php?success= Il tuo account è stato creato con successo!");
          exit();
