@@ -1,9 +1,3 @@
-<?php
-session_start();
-
-include '../Devops/SetUpDb.php'; 
-
-?>
 
 <!DOCTYPE HTML>  
 <html>
