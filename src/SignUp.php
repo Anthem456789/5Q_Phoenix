@@ -74,15 +74,16 @@
   <div class ="CategoriaBox">
 
    <label id="lab">categoria</label>
-   <input  id="Cat" type="radio" name="professione" value="1"><p>Medico</p>
-   <input id="Cat" type="radio" name="professione" value="2"><p>Infermiere</p>
-   <input id="Cat" type="radio" name="professione" value="3"><p>Paziente</p>
+   <p>Medico</p><input  id="Cat" type="radio" name="professione" value="1">
+   <p>Infermiere</p><input id="Cat" type="radio" name="professione" value="2">
+   <p>Paziente</p><input id="Cat" type="radio" name="professione" value="3">
 
   </div>
-
+  
+<button type="submit">Registrati</button><br>
 <a class="register" href="Login.php">Hai già un account?</a>  
   
-<button type="submit">Registrati</button>
+
 
   </form>
 
