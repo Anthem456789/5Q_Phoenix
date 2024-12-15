@@ -58,6 +58,13 @@ echo "</pre>";
         while ($row = $result->fetch_assoc()) {
             echo "Tipo Ruolo: " . " ". $row['tipoRuolo'] . "<br>";
 
+            if($row['tipoRuolo'] === 'Paziente'){
+                    $_SESSION['ruolo'] = 'Paziente';
+                    ?>
+                    <a href="BackBone_Phoenix/Prenotazioni.php"><i class="Infermiere"></i>PrenotaVisita</a>
+
+                <?php }
+
             /* Inizio codice per Infermiere*/
             if($row['tipoRuolo'] === 'Infermiere') { 
                 
