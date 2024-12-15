@@ -80,9 +80,9 @@ include '../Devops/SetUpDb.php';
   <div class ="CategoriaBox">
 
    <label id="lab">categoria</label>
-   <input  id="Cat" type="radio" name="gender" value="1"><p>Medico</p>
-   <input id="Cat" type="radio" name="gender" value="2"><p>Infermiere</p>
-   <input id="Cat" type="radio" name="gender" value="3"><p>Paziente</p>
+   <input  id="Cat" type="radio" name="professione" value="1"><p>Medico</p>
+   <input id="Cat" type="radio" name="professione" value="2"><p>Infermiere</p>
+   <input id="Cat" type="radio" name="professione" value="3"><p>Paziente</p>
 
   </div>
 
