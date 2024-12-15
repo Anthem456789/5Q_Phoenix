@@ -1,9 +1,3 @@
-<?php
-
-include '../Devops/SetUpDb.php'; 
-
-?>
-
 
 <!DOCTYPE HTML>
 <html>
