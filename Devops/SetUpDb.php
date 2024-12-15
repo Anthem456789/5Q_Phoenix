@@ -28,6 +28,7 @@ $sql = " CREATE TABLE IF NOT EXISTS utenti (
     cognome VARCHAR(50) DEFAULT NULL,
     data_nascita DATE NOT NULL,
     email VARCHAR(50) DEFAULT NULL,
+    telefono VARCHAR(15) DEFAULT NULL,
     password VARCHAR(100) DEFAULT NULL,
     CONSTRAINT ChiavePrimaria PRIMARY KEY(codiceFiscale)
 ); ";
@@ -195,7 +196,7 @@ if ($conn2->query($sql)) {
 
 /* ----------Inserimento Dati Significativi--------------- */
 
-$sql = "INSERT INTO Ruoli (tipoRuolo, id_ruoli) VALUES
+$sql = "INSERT IGNORE INTO Ruoli (tipoRuolo, id_ruoli) VALUES
 ('Dottore', 1),
 ('Infermiere', 2),
 ('Paziente', 3);
@@ -209,7 +210,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO utenti (codiceFiscale, nome, cognome, data_nascita, email, password) VALUES
+$sql = "INSERT IGNORE INTO utenti (codiceFiscale, nome, cognome, data_nascita, email, password) VALUES
 ('RSSMRA85M01H501Z', 'Mario', 'Rossi', '1985-01-01', 'mario.rossi@gmail.com', '7c6a180b36896a0a8c02787eeafb0e4c'),
 ('VRNGNN90A01H501Y', 'Giovanni', 'Verdi', '1990-02-15', 'giovanni.verdi@gmail.com', '6cb75f652a9b52798eb6cf2201057c73'),
 ('BNCMRA75D01H501X', 'Anna', 'Bianchi', '1975-03-20', 'anna.bianchi@gmail.com', '819b0643d6b89dc9b579fdfc9094f28e'),
@@ -229,7 +230,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO Documenti (id_documento, codiceFiscale) VALUES
+$sql = "INSERT IGNORE INTO Documenti (id_documento, codiceFiscale) VALUES
 (1, 'RSSMRA85M01H501Z'),
 (2, 'VRNGNN90A01H501Y'),
 (3, 'BNCMRA75D01H501X'),
@@ -249,7 +250,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO Patologia (id_malattia) VALUES
+$sql = "INSERT IGNORE INTO Patologia (id_malattia) VALUES
 (1),
 (2),
 (3),
@@ -271,7 +272,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO utenti_ruoli (codiceFiscale, id_ruoli) VALUES
+$sql = "INSERT IGNORE INTO utenti_ruoli (codiceFiscale, id_ruoli) VALUES
 ('RSSMRA85M01H501Z', 1),
 ('VRNGNN90A01H501Y', 2),
 ('BNCMRA75D01H501X', 3),
@@ -291,7 +292,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO Patologia_Documenti (id_documento, id_malattia, codiceFiscale) VALUES
+$sql = "INSERT IGNORE INTO Patologia_Documenti (id_documento, id_malattia, codiceFiscale) VALUES
 (1, 1, 'RSSMRA85M01H501Z'),
 (2, 2, 'TSTLRA83I01H501Q'); ";
 
@@ -303,7 +304,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO Reparto (id_reparto, id_malattia, nome_reparto) VALUES
+$sql = "INSERT IGNORE INTO Reparto (id_reparto, id_malattia, nome_reparto) VALUES
 (1, 1, 'Oncologia'),
 (2, 2, 'Neurologia'),
 (3, 3, 'Cardiologia'),
@@ -317,7 +318,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO Letto (id_letto, isTaken) VALUES
+$sql = "INSERT IGNORE INTO Letto (id_letto, isTaken) VALUES
 (1, TRUE),
 (2, TRUE),
 (3, FALSE),
@@ -331,7 +332,7 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT INTO Reparto_Letto (id_reparto, id_letto) VALUES
+$sql = "INSERT IGNORE INTO Reparto_Letto (id_reparto, id_letto) VALUES
 (1, 1),
 (1, 2),
 (2, 3),
