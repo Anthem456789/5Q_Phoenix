@@ -343,3 +343,7 @@ if ($conn2->query($sql)) {
 } else {
     echo $conn2->error;
 }
+
+$conn->close();
+
+?>
