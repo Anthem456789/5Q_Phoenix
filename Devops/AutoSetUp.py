@@ -9,11 +9,14 @@ def main():
     current_directory = os.path.dirname(os.path.abspath(__file__))
 
     # Percorso completo del file PHP
-    php_file = os.path.join(current_directory, "SetUpDb.php")  # Costruisci il percorso completo
-
-    # Verifica se il file PHP esiste
+    php_file = os.path.join(current_directory, "SetUpDb.php")
     if not os.path.exists(php_file):
         print(f"Il file {php_file} non esiste. Verifica il percorso.")
+        return  # Esci dalla funzione se il file non esiste  # Costruisci il percorso completo
+    php_file2 = os.path.join(current_directory,"DeleteData.php")
+    # Verifica se il file PHP esiste
+    if not os.path.exists(php_file2):
+        print(f"Il file {php_file2} non esiste. Verifica il percorso.")
         return  # Esci dalla funzione se il file non esiste
 
     # Verifica se l'eseguibile PHP esiste
@@ -23,11 +26,22 @@ def main():
 
     # Esegui il comando PHP tramite subprocess
     try:
-        result = subprocess.run([php_path, php_file], check=True, text=True, capture_output=True)
-        # Mostra l'output del comando PHP
-        print("Output:\n", result.stdout)
-        if result.stderr:
-            print("Errori:\n", result.stderr)
+
+        print("Inserisci 1 per eseguire SetUpDb.php;")
+        print("Inserisci 2 per eseguire DeleteData.php;")
+        scelta = int(input())
+        if scelta == 1:
+            result = subprocess.run([php_path, php_file], check=True, text=True, capture_output=True)
+            # Mostra l'output del comando PHP
+            print("Output:\n", result.stdout)
+            if result.stderr:
+                print("Errori:\n", result.stderr)
+        if scelta == 2:
+            result = subprocess.run([php_path, php_file2], check=True, text=True, capture_output=True)
+            # Mostra l'output del comando PHP
+            print("Output:\n", result.stdout)
+            if result.stderr:
+                print("Errori:\n", result.stderr)
     except subprocess.CalledProcessError as e:
         print(f"Si è verificato un errore durante l'esecuzione del file PHP: {e}")
         print("Output parziale:\n", e.stdout)
