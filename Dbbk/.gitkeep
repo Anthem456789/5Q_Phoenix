@@ -1,0 +1,15 @@
+Tutte le password presenti sono già convertite in valori ascii tramite la funzione ascii md5().
+
+Qui sono riportate tutte le password degli utenti di test:
+
+Mario Rossi : password1 --> 7c6a180b36896a0a8c02787eeafb0e4c (mario.rossi@gmail.com)
+Giovanni Verdi : password2 --> 6cb75f652a9b52798eb6cf2201057c73 (giovanni.verdi@gmail.com)
+Anna Bianchi : password3 --> 819b0643d6b89dc9b579fdfc9094f28e (anna.bianchi@gmail.com)
+Francesca Colombo : password4 --> 34cc93ece0ba9e3f6f235d4af979b16c (francesca.colombo@gmail.com)
+Luca De Luca : password5 --> db0edd04aaac4506f7edab03ac855d56 (luca.deluca@gmail.com)
+Elena Pellegrini password7 --> 00cdb7bb942cf6b290ceb97d6aca64a3 (elena.pellegrini@gmail.com)
+Chiara Rinaldi : password9 --> 5d69dd95ac183c9643780ed7027d128a (chiara.rinaldi@gmail.com)
+Alessandro Tosi : password10 --> 87e897e3b54a405da144968b2ca19b45 (alessandro.tosi@gmail.com)
+
+
+
