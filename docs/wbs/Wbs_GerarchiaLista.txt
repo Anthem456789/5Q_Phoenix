@@ -1,0 +1,24 @@
+Phoenix
+	1. Fase di Inizio
+		1.1 Scopo del Sistema
+			1.1.1 Identificazione Obiettivi del progetto
+			1.1.2 Definizione Deliverable principali
+		1.2 Raccolta e Analisi dei Requisiti
+			1.2.1 Identificazione Stakeholder
+		1.3 Studio di Fattibilità
+	2. Fase di Pianificazione
+		2.1 Progettazione Frontend
+		2.2 Progettazione Backend
+			2.2.1 Scelta DBMS e Linguaggio di programmazione
+	3. Fase di Esecuzione
+		3.1 Sviluppo Frontend
+			3.1.1 Test di Integrazione
+			3.1.2 Risoluzione Bug
+		3.2 Sviluppo Backend
+			3.2.1 Integrazione Database
+			3.2.2 Risoluzione Bug
+		3.3 Integrazione Frontend-Backend
+	4. Fase di Chiusura
+		4.1 Test di Sistema
+		4.2 Rilascio e Deploy
+		4.3 Monitoraggio
