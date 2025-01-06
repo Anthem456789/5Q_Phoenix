@@ -12,10 +12,6 @@ $dbname = "5q_ombrello_phoenix";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-/* Debug */
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
 
 if (isset($_SESSION['codiceFiscale']) && isset($_SESSION['nome']) && isset($_SESSION['cognome']) && isset($_SESSION['email']) && isset($_SESSION['ruolo'])) {
     $id_utente = $_SESSION["codiceFiscale"];
@@ -40,18 +36,24 @@ $sql2 = "SELECT DISTINCT T.id_letto, T.id_reparto , Y.isTaken
 if ($stmt2 = $conn->prepare($sql2)) {
     $stmt2->execute();
     $result2 = $stmt2->get_result();
+
+    echo "<div class='letti-container'>";
+
     while ($row2 = $result2->fetch_assoc()) {
         $idLetto = htmlspecialchars($row2['id_letto']);
         $isTaken = $row2['isTaken'];
 
+        echo "<div class= 'letto-box'>";
         echo "ID letto: " . $row2['id_letto'] . " >>> Reparto: " . $row2['id_reparto'] . "<br>";
 
-        if ($isTaken == 1) {
-            echo "<button class='iscriviti-btn' onclick=\"aggiorna('$idLetto', 0)\">Rilascia</button><br>";
+        if ($row2['isTaken'] == 1) {
+            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"aggiorna('{$row2['id_letto']}', 0)\">Rilascia</button><br>";
         } else {
-            echo "<button class='iscriviti-btn' onclick=\"aggiorna('$idLetto', 1)\">Assegna</button><br>";
+            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"aggiorna('{$row2['id_letto']}', 1)\">Assegna</button><br>";
         }
+        echo "</div>";
     }
+    echo "</div>";
     $stmt2->close();
 }
 
