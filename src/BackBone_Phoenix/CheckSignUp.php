@@ -55,13 +55,16 @@
     $codiceFiscale = test_input($_POST["codiceFiscale"]);
     $idRuolo = test_input($_POST["professione"]);
 
-    $_SESSION["nome"] = $nom;
-    $_SESSION["pass"] = $pass;
-    $_SESSION["em"] = $email;
-    $_SESSION["cognome"] = $cognome;
-    $_SESSION["Re_password"] = $Re_pass;
-    $_SESSION["data_nascita"] = $data_nascita;
-    $_SESSION["codiceFiscale"] = $codiceFiscale;
+
+    setcookie("email", $email, time() + 3600, '/' );
+    setcookie("userpass", $pass, time() + 3600, '/' );
+    setcookie("Re_password", $Re_pass, time() + 3600, '/' );
+    setcookie("nome", $nom, time() + 3600, '/' );
+    setcookie("cognome", $cognome, time() + 3600, '/' );
+    setcookie("data", $data_nascita, time() + 3600, '/' );
+    setcookie("codiceFiscale", $codiceFiscale, time() + 3600, '/' );
+    setcookie("ruolo", $idRuolo, time() + 3600, '/' );
+
     
     
     
@@ -84,11 +87,15 @@
         header("Location: ../SignUp.php?error=Password Obbligatoria");
         exit();    
       }else if(!checkPass($pass)){
-        header("Location: ../SignUp.php?error=Password non conforme o troppo corta");
+        /* Cancello il cookie*/ 
+        setcookie("userpass", "", time() - 3600, '/');
+        header("Location: ../SignUp.php?error=La password non contiene almeno un numero e una maiuscola o è troppo corta");
       }else if(empty($Re_pass)) {
         header("Location: ../SignUp.php?error=Ripeti la password");
         exit();    
       }else if($pass !== $Re_pass){ 
+        /* Cancello il cookie*/ 
+        setcookie("Re_password", "", time() - 3600, '/');
          header("Location: ../SignUp.php?error=Le due password non corrispondono!");
          exit();
       }else if(empty($idRuolo)){
