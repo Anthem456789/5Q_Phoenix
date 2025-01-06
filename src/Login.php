@@ -4,11 +4,11 @@
 
 <head>
     <title> Login </title>
-    <link rel="stylesheet" type="text/css" href="Grafica/style.css?<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/GraficaForm.css?<?php echo time(); ?>">
 </head>
 
 <body>
-    </div class="container" id="container">
+    <div class="container" id="container">
     <form action="BackBone_Phoenix/CheckLogin.php" method="POST">
         <h2>Bentornato</h2>
         <!-- Get è una richiesta o un invio dati fatta al server web o al pc stesso, dove i parametri sono inviati tramite URL  -->
