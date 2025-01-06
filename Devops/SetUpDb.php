@@ -23,7 +23,7 @@ if ($conn->query($sql)) {
 $conn2 = new mysqli($serverName, $username, $password, $db_name);
 
 $sql = " CREATE TABLE IF NOT EXISTS utenti (
-    codiceFiscale VARCHAR(20) NOT NULL DEFAULT '',
+    codiceFiscale VARCHAR(20) NOT NULL,
     nome VARCHAR(100) DEFAULT NULL,
     cognome VARCHAR(50) DEFAULT NULL,
     data_nascita DATE NOT NULL,
@@ -44,7 +44,7 @@ if ($conn2->query($sql)) {
 
 
 $sql = " CREATE TABLE IF NOT EXISTS Ruoli (
-    tipoRuolo VARCHAR(30) NOT NULL DEFAULT '',
+    tipoRuolo VARCHAR(30) NOT NULL,
     id_ruoli INT(6) NOT NULL,
     CONSTRAINT ChiavePrimariaRuoli PRIMARY KEY(id_ruoli)
 ); ";
@@ -192,6 +192,21 @@ if ($conn2->query($sql)) {
 } else {
     echo $conn->error;
 }
+
+/* ---------------------------------------------------- */
+
+$sql = " CREATE TABLE IF NOT EXISTS Notifica (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codiceFiscale VARCHAR(20) NOT NULL,
+    categoria VARCHAR(12),
+    titolo VARCHAR(100) NOT NULL,
+    descrizione VARCHAR(3000) NOT NULL,
+    data_creazione DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    visualizzato BOOLEAN DEFAULT FALSE,
+    CONSTRAINT FK_codiceFiscale_Notifica FOREIGN KEY(codiceFiscale)
+          REFERENCES utenti(codiceFiscale)
+);";
+
 
 
 /* ----------Inserimento Dati Significativi--------------- */
