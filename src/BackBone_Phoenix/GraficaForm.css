@@ -1,0 +1,109 @@
+/* ===Login/registrazione=== */
+body {
+    background: #fff8ef;
+    display: flex;
+    justify-content: center; /* Allinea l'elemento flex al centro */
+    align-items: center;  /* allineamento degli elementi dentro un contenitore flex */
+    height: 100vh;
+    }
+    
+    form {
+        width: 500px;
+        border: 2px solid #3f8a47;
+        background-color: #93ff9f;
+        padding: 40px;
+        border-radius: 45px;
+        box-shadow: 0 5px 15px #fad637; 
+        overflow: hidden;
+    }
+    
+    
+    label {
+        
+        color: #000000;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    
+    button {
+        float: right;
+        padding: 10px 15px;
+        border: 2px solid #23b1bb;
+        background: #2be4f1;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    button:hover {
+        opacity: .7;
+    }
+
+    input {
+        display: block;
+        border: 2px solid #2a592f;
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+        border-radius: 5px;
+        
+    }
+    input:hover{
+        opacity: .7;
+    }
+
+    .CategoriaBox{
+    
+        display: flex;
+        width: 70%;
+ 
+     }
+     .CategoriaBox #Cat{
+         display: flex;
+         align-items: center;
+         /* Riduce la dimensione dell'elemento al 60% */
+         transform: scale(0.6); 
+         cursor: pointer;
+     }
+ 
+     .CategoriaBox p{
+        margin: 0;
+        font-size: 18px;
+        padding: 10px;
+        color: #5c5b5b;
+     }
+    
+    .error{
+        display: block;
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+        background: #f3afaf;
+        opacity: .60;
+        border-radius: 20px;
+    }
+    .success{
+        display: block;
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+        background: #baffba;
+        opacity: .60;
+        border-radius: 20px;
+    }
+    h2 {
+       text-align: center;
+       margin-bottom: 40px;
+    }
+
+    .register{
+        display: inline-block;
+        font-family: 'Times New Roman', serif;
+        padding: 10px;
+        color: #444; 
+        
+    }
+
+    .register:hover{
+        text-decoration: underline;
+    }
