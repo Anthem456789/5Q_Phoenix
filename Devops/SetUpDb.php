@@ -206,7 +206,11 @@ $sql = " CREATE TABLE IF NOT EXISTS Notifica (
     CONSTRAINT FK_codiceFiscale_Notifica FOREIGN KEY(codiceFiscale)
           REFERENCES utenti(codiceFiscale)
 );";
-
+if ($conn2->query($sql)) {
+    echo "Tabella \"Notifica\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
 
 
 /* ----------Inserimento Dati Significativi--------------- */
