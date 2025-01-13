@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2024-12-05" view-index="1" gantt-divider-location="720" resource-divider-location="300" version="3.3.3312" locale="it_IT">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="442" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="107" order="1"/>
+        <field id="tpd5" name="Data di fine" width="155" order="2"/>
+        <field id="tpd15" name="Note" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+        <option id="color.recent"><![CDATA[#ff3333 #339900 #ff6633 #ff0000 #009900 #ff9999 #ccccff #ccffff]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nome" width="210" order="0"/>
+        <field id="1" name="Ruolo predefinito" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="d1360de1f6f241cd973e9e9c2c6d5c36" name="Phoenix" meeting="false" start="2024-09-10" duration="155" complete="71" expand="true">
+            <task id="1" uid="1a2978009b64499db732093eac8a0100" name="1. Fase Di Inizio" meeting="false" start="2024-09-10" duration="80" complete="96" expand="true">
+                <task id="3" uid="1da5c741e7664338a729861226ab6f23" name="1.1 Business Case" meeting="false" start="2024-09-10" duration="15" complete="100" priority="0" expand="true">
+                    <depend id="2" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="2" uid="06ef5447756244b8ad99e2fedfc25ccd" name="1.2 Project Brief" meeting="false" start="2024-10-01" duration="1" complete="100" expand="true">
+                    <depend id="4" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="4" uid="3279b74505c34d7081fe870835178866" name="1.3 PDD" meeting="false" start="2024-10-02" duration="4" complete="100" expand="true">
+                    <depend id="5" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="5" uid="bdb63fb797674c3e859aa67c0fb57c3f" name="1.4 Use-Case v1" color="#ccffff" meeting="false" start="2024-10-08" duration="3" complete="100" expand="true">
+                    <depend id="6" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="6" uid="41ab1bdc9e304008963d7162b2da9dc7" name="1.5 Use-Case v2" color="#ccffff" meeting="false" start="2024-10-11" duration="14" complete="100" expand="true"/>
+                <task id="7" uid="39b5837be0bf47ed9b812b951072e4ab" name="1.6 Gantt v1" color="#ccccff" meeting="false" start="2024-10-08" duration="7" complete="100" expand="true"/>
+                <task id="8" uid="4ea21d856a024265abde7d77f42135d6" name="1.7 Gantt v2" color="#ccccff" meeting="false" start="2024-10-22" duration="10" complete="100" expand="true">
+                    <depend id="9" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="49" uid="0adbae7c73234b0cb9e6f5ad63b98c25" name="1.8 Gantt v3" meeting="false" start="2024-12-27" duration="2" complete="0" expand="true"/>
+            </task>
+            <task id="9" uid="e3e434c3333b472fb89146de0bd2fe61" name="2. Fase Di Pianificazione" meeting="false" start="2024-11-05" duration="17" complete="100" expand="true">
+                <depend id="24" type="2" difference="0" hardness="Strong"/>
+                <task id="10" uid="2814c3d5217d40bcaaf9c5e213697920" name="2.1.1  Progettazione Db" meeting="false" start="2024-11-05" duration="12" complete="100" priority="0" expand="true">
+                    <depend id="14" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="14" uid="dec1602c00c948bbaa09da1d34ff8c15" name="2.2.1 Progettazione Front-end" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true">
+                    <task id="16" uid="5795db7e07174d2bbb308d899f731992" name="2.2.2 Use-Case : Home" color="#ff3333" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="18" uid="8e41b23a0ac5445d8bad898f78226bef" name="2.2.3 Use-Case : Pagina infermiere" color="#ff3333" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="17" uid="18fec9845e3c43fb9f453f6c2063164b" name="2.2.4 Use-Case :Pagina prenotazioni" color="#339900" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                </task>
+                <task id="15" uid="073d53f1a3a240a0809db24849a57ce8" name="2.3.1 Progettazione Back-end" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true">
+                    <task id="11" uid="fe6839e80b2f4800a5be6d126cac6601" name="2.3.2 Login" color="#ff6633" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="12" uid="d784b1f74a4b4596811e9febaa1d7b84" name="2.3.3  Sign-up" color="#ff6633" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="19" uid="443967d85f404beca3267623baafae53" name="2.3.4 Visite intramoenia" color="#009900" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="20" uid="37a6689291584010912ce422b2a1d52d" name="2.3.5 Visite per consulto medico" color="#339900" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="21" uid="ed7d70e06ffd4e4992aa28c34be001cc" name="2.3.6 Inserimento Dosi medicinali (Medico)" color="#339900" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="22" uid="f156b05a105848269f706c83aecfa205" name="2.3.7  Bed Manager" color="#ff0000" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                    <task id="23" uid="fdf14e81131f404fb3c64ab919c99680" name="2.3.8 Controllo farmaci(Infermiere)" color="#ff0000" meeting="false" start="2024-11-21" duration="5" complete="100" expand="true"/>
+                </task>
+            </task>
+            <task id="24" uid="66d86a6f99b74b0c94b4f5248a27aa08" name="3. Fase Esecuzione" meeting="false" start="2024-11-28" duration="76" complete="60" expand="false">
+                <task id="32" uid="57c3c1f431bb4042b808bcf66022bd20" name="3.1 Sviluppo Frontend" meeting="false" start="2024-11-28" duration="14" complete="100" expand="false">
+                    <task id="33" uid="bf0d53ee048e4c9fbc14a85c49d19ca7" name="3.1.1 Pagina Login" color="#ff6633" meeting="false" start="2024-11-28" duration="7" complete="100" expand="true"/>
+                    <task id="34" uid="bd528291549247afaa7afe413402795e" name="3.1.2 Pagina Sign-up" color="#ff6633" meeting="false" start="2024-12-09" duration="7" complete="100" expand="true"/>
+                    <task id="35" uid="7abf36ffc3ca47e4879f429a03118f3f" name="3.1.3 Pagina Home" color="#ff0000" meeting="false" start="2024-12-09" duration="7" complete="100" expand="true"/>
+                </task>
+                <task id="31" uid="e2eee5b6293d4075a2d9c0ba6cc0e501" name="3.2 Sviluppo Backend" meeting="false" start="2024-11-28" duration="76" complete="54" expand="false">
+                    <task id="25" uid="0cb8b5eff31d4d3090e93c0109712990" name="3.2.1 Gestione Login" color="#ff6633" meeting="false" start="2024-11-28" duration="7" complete="100" expand="true"/>
+                    <task id="26" uid="08da375e718445be8ea81732778d80b5" name="3.2.2 Gestione Sign Up" color="#ff6633" meeting="false" start="2024-12-09" duration="7" complete="100" expand="true"/>
+                    <task id="36" uid="e534d0bd9bcb44fea5c3078ac1a53cce" name="3.2.3 Gestione Home" color="#ff0000" meeting="false" start="2024-12-09" duration="7" complete="100" expand="true"/>
+                    <task id="44" uid="54b4bc32d40644919c466877ab2075c8" name="3.2.4 Gestione prenotazione" color="#339900" meeting="false" start="2024-12-27" duration="25" complete="70" expand="true"/>
+                    <task id="37" uid="dec74a228a7d45d48471b3133d8d58a8" name="3.2.5 Gestione Bed manager" color="#ff3333" meeting="false" start="2024-12-27" duration="25" complete="70" expand="true"/>
+                    <task id="38" uid="004085418edb4514bed1eeb6b4391182" name="3.2.6 Gestione Notifiche di sistema" color="#ff6633" meeting="false" start="2024-12-27" duration="25" complete="70" expand="true"/>
+                    <task id="29" uid="453b72aa9e0c4d0a81e3793975caf9bc" name="3.2.7 Gestione Inserimento Dosi medicinali (Medico)" color="#339900" meeting="false" start="2025-02-03" duration="10" complete="0" expand="true"/>
+                    <task id="30" uid="77188e0b5d1f4213b986da7f6d161da0" name="3.2.8 Gestione Controllo farmaci(Infermiere)" color="#ff3333" meeting="false" start="2025-02-03" duration="10" complete="0" expand="true"/>
+                    <task id="45" uid="9f513629f3ca4a07b25b8a07699c0df3" name="3.2.9 Implementazione API autentificazine" meeting="false" start="2025-02-17" duration="10" complete="0" expand="true"/>
+                    <task id="46" uid="080cb35b514448218ec7c66b0d60dca0" name="3.2.10 Implementazione API pagamento paypal(?)" meeting="false" start="2025-03-03" duration="9" complete="0" expand="true"/>
+                </task>
+            </task>
+            <task id="47" uid="74ed14e2a88d4b0bb0eb061ba91d410a" name="4. Fase di Chiusura" meeting="false" start="2025-03-14" duration="22" complete="0" expand="false">
+                <task id="48" uid="9d13e77f97ed4518a9734cb71020b6ec" name="4.1 Test di sistema" meeting="false" start="2025-03-14" duration="22" complete="0" expand="true"/>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Marcolini Andrea " function="Default:1" contacts="marcolini.andrea.stud@itisgalileiroma.it" phone=""/>
+        <resource id="1" name="Roberti Cristiano" function="Default:0" contacts="roberti.cristiano.stud@itisgalileiroma.it" phone=""/>
+        <resource id="2" name="Guarracino Emanuele" function="Default:0" contacts="guarracino.emenauele.stud@itisgalileiroma.it" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="3" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="2" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="5" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="6" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="7" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="10" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="18" resource-id="0" function="Default:1" responsible="true" load="25.0"/>
+        <allocation task-id="16" resource-id="0" function="Default:1" responsible="false" load="25.0"/>
+        <allocation task-id="22" resource-id="0" function="Default:1" responsible="true" load="25.0"/>
+        <allocation task-id="23" resource-id="0" function="Default:1" responsible="true" load="25.0"/>
+        <allocation task-id="35" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="36" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="30" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="37" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="46" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="48" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="49" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="3" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="2" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="1" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="6" resource-id="1" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="7" resource-id="1" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="8" resource-id="1" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="10" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="1" function="Default:0" responsible="true" load="25.0"/>
+        <allocation task-id="19" resource-id="1" function="Default:0" responsible="true" load="25.0"/>
+        <allocation task-id="21" resource-id="1" function="Default:0" responsible="true" load="25.0"/>
+        <allocation task-id="29" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="1" function="Default:0" responsible="true" load="25.0"/>
+        <allocation task-id="44" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="46" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="48" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="49" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="2" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="2" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="6" resource-id="2" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="7" resource-id="2" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="8" resource-id="2" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="10" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="2" function="Default:0" responsible="true" load="50.0"/>
+        <allocation task-id="12" resource-id="2" function="Default:0" responsible="true" load="50.0"/>
+        <allocation task-id="33" resource-id="2" function="Default:0" responsible="true" load="50.0"/>
+        <allocation task-id="34" resource-id="2" function="Default:0" responsible="true" load="50.0"/>
+        <allocation task-id="25" resource-id="2" function="Default:0" responsible="true" load="50.0"/>
+        <allocation task-id="26" resource-id="2" function="Default:0" responsible="true" load="50.0"/>
+        <allocation task-id="38" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="46" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="48" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="49" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
