@@ -79,6 +79,25 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
+$sql = " CREATE TABLE IF NOT EXISTS Prenotazioni (
+    codiceFiscale CHAR(20) NOT NULL,
+    id_reparto INT(6) NOT NULL,
+    CONSTRAINT ChiaviPrimarie PRIMARY KEY(codiceFiscale, id_reparto),
+    CONSTRAINT FK_codiceFiscalesesso FOREIGN KEY(codiceFiscale)
+        REFERENCES utenti(codiceFiscale),
+    CONSTRAINT FK_Reparto FOREIGN KEY(id_reparto)
+        REFERENCES Reparto(id_reparto)
+);";
+
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Prenotazioni\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
+
+
+/* ---------------------------------------------------- */
 
 $sql = " CREATE TABLE IF NOT EXISTS Patologia (
     id_malattia INT(6) NOT NULL,
