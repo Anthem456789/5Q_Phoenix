@@ -24,7 +24,8 @@ $tables = [
     'Documenti',
     'utenti',
     'Ruoli',
-    'Patologia'
+    'Patologia',
+    'Notifica'
 ];
 
 foreach ($tables as $table) {
