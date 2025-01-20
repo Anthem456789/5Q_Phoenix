@@ -248,3 +248,134 @@ header .image-text  .tipo {
     color: #444;
 }
 
+/* ===Prenotazioni=== */
+
+.Prenotazioni-body {
+    
+    overflow: hidden; /* Impedisce lo scorrimento del contenuto fuori dallo schermo */
+    height: 100vh; /* Assicura che il body prenda l'intera altezza della finestra */
+}
+
+.headerPrenotazioni {
+
+   position: sticky;
+   padding-left: 1.5rem;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 1000;
+   
+}
+
+
+.container-Prenotazioni { 
+    position: relative;
+    top: 100px;
+}
+
+.headerPrenotazioni #ToggleBox {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-right: 8rem;
+    background-color: #2be4f1;
+
+}
+
+
+.headerPrenotazioni #buttonPrenotazioni {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-right: 8rem;
+    background-color: #2be4f1;
+}
+
+#ToggleBox:hover {
+    background: #0082fcfa;
+}
+
+#popupBox {
+    position: absolute;
+    top: 68px;
+    right: 4.5rem;
+    width: 15rem;
+    padding: 5px;
+    border: 1px solid #d6a534;
+    border-radius: 5px;
+    background-color: #fad637;
+    box-shadow: 0 10px 15px #2be4f1;
+    z-index: 9999; /* Ensure it is on top of other elements */
+}
+
+#popupBox #prenotazioniForm {
+    padding: 7px;
+}
+
+#popupBox #prenotazioniForm input {
+    display: block;
+    padding: 10px;
+    margin: 10px auto;
+    border: 2px solid #000000;
+    width: 80%;
+    background-color: #2be4f1;
+}
+
+#popupBox #prenotazioniForm button {
+    float: right;
+    padding: 5px;
+    border: 2px solid #000000;
+    border-radius: 15%;
+    background-color: #2be4f1;
+}
+
+.invisible {
+    display: none;
+}
+
+#errorPrenotazioni {
+    
+        display: block;
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+        background: #f3afaf;
+        opacity: .60;
+    
+}
+
+#successPrenotazioni {
+        display: block;
+        width: 95%;
+        padding: 10px;
+        margin: 10px auto;
+        background: #baffba;
+        opacity: .60;
+        border-radius: 20px;
+    }
+
+
+    .prenotazione-box {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #ffffff; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Effetto ombra */
+    }
+    
+    .Prenotazione-titolo {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }

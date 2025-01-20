@@ -1,4 +1,4 @@
-<script src="FunzioniDinamiche.js" defer></script>
+
 
 <?php
 
@@ -12,6 +12,11 @@ $dbname = "5q_ombrello_phoenix";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+?>
+
+<!DOCTYPE html>
+<html lang="it">
+<?php
 
 if (isset($_SESSION['codiceFiscale']) && isset($_SESSION['nome']) && isset($_SESSION['cognome']) && isset($_SESSION['email']) && isset($_SESSION['ruolo'])) {
     $id_utente = $_SESSION["codiceFiscale"];
@@ -47,9 +52,9 @@ if ($stmt2 = $conn->prepare($sql2)) {
         echo "ID letto: " . $row2['id_letto'] . " >>> Reparto: " . $row2['id_reparto'] . "<br>";
 
         if ($row2['isTaken'] == 1) {
-            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"aggiorna('{$row2['id_letto']}', 0)\">Rilascia</button><br>";
+            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row2['id_letto']}', 0)\">Rilascia</button><br>";
         } else {
-            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"aggiorna('{$row2['id_letto']}', 1)\">Assegna</button><br>";
+            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row2['id_letto']}', 1)\">Assegna</button><br>";
         }
         echo "</div>";
     }
@@ -59,3 +64,8 @@ if ($stmt2 = $conn->prepare($sql2)) {
 
 
 ?>
+
+<script src="FunzioniDinamiche.js" defer></script>
+
+
+</html>

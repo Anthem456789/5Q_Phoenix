@@ -18,31 +18,7 @@ echo "</pre>";
 /* Se non ci sono variabili sessioni, allora non è stato fatto il login */
 if (isset($_SESSION["codiceFiscale"]) && isset($_SESSION["email"])) {
 
-    ?>
-
-<!-- Inizio parte HTML -->
-<!DOCTYPE html>
-<html lang="it">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <!-- Link al css da redifinire successivamente-->
-    <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/Grafica.css?<?php echo time(); ?>">
-    <script src="Backbone_Phoenix/FunzioniDinamiche.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <header class="header">
-        <section class="copertina">
-            <h2 class="generico">Phoenix</h2>
-
-
-            <?php
-                /* Verifica se la sessione del Codice Fiscale è operativa (Idealmente ci sono altri parametri da verificare.) */
+              /* Verifica se la sessione del Codice Fiscale è operativa (Idealmente ci sono altri parametri da verificare.) */
                 if (isset($_SESSION["codiceFiscale"])) {
                     $codiceFiscale = $_SESSION["codiceFiscale"];
 
@@ -58,8 +34,56 @@ if (isset($_SESSION["codiceFiscale"]) && isset($_SESSION["email"])) {
                 } else {
                     echo "Codice fiscale non trovato nella sessione.";
                 }
+/*si prepara lo statement*/
+if ($stmt = $conn->prepare($sql)) {
+    /* Associa il parametro alla query (s per string) */
+    $stmt->bind_param("s", $codiceFiscale);
 
-                ?>
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    /* mette i risulati della riga in un array associativo */
+    while ($row = $result->fetch_assoc()) {
+        if ($row['tipoRuolo'] === 'Paziente') {
+            $_SESSION['ruolo'] == 'Paziente';
+
+        }
+        if ($row['tipoRuolo'] === 'Infermiere') {
+            $_SESSION['ruolo'] == 'Infermiere';
+            /* Si chiude il tag php per permettere al link <a> di funzionare in quanto HTML */
+        
+    }
+
+    if ($row['tipoRuolo'] === 'Dottore') {
+        $_SESSION['ruolo'] == 'Dottore';
+        /* Si chiude il tag php per permettere al link <a> di funzionare in quanto HTML */
+    
+}   
+    }
+}
+    ?>
+
+<!-- Inizio parte HTML -->
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Link al css da redifinire successivamente-->
+    <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/Grafica.css?<?php echo time(); ?>">
+    <script src="Backbone_Phoenix/FunzioniDinamiche.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <meta name="ruolo-utente" content="<?php echo $_SESSION['ruolo']; ?>">
+    <meta name="codiceFiscale" content="<?php echo $_SESSION['codiceFiscale']; ?>">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <section class="copertina">
+            <h2 class="generico">Phoenix</h2>
         </section>
     </header>
 
@@ -94,33 +118,15 @@ if (isset($_SESSION["codiceFiscale"]) && isset($_SESSION["email"])) {
                     </li>
                     <li class="nav-link">
 
-                        <?php /*si prepara lo statement*/
-                            if ($stmt = $conn->prepare($sql)) {
-                                /* Associa il parametro alla query (s per string) */
-                                $stmt->bind_param("s", $codiceFiscale);
-
-
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-                                /* mette i risulati della riga in un array associativo */
-                                while ($row = $result->fetch_assoc()) {
-                                    if ($row['tipoRuolo'] === 'Paziente') {
-                                        $_SESSION['ruolo'] = 'Paziente';
-                                        ?>
-                        <a href="#" onclick="caricapagina('BackBone_Phoenix/Prenotazioni.php')">
+                        <?php 
+                            if ($_SESSION['ruolo'] = 'Paziente') { ?>
+                        <a href="BackBone_Phoenix/Prenotazioni.php">
                             <?php }
                                     /* Inizio codice per Infermiere*/
-                                    if ($row['tipoRuolo'] === 'Infermiere') {
-                                        $_SESSION['ruolo'] = 'Infermiere';
-                                        /* Si chiude il tag php per permettere al link <a> di funzionare in quanto HTML */
-                                        ?>
+                                    if ($_SESSION['ruolo'] == 'Infermiere') { ?>
                             <a href="#" onclick="caricapagina('BackBone_Phoenix/Infermiere.php')">
-                                <?php }
-                                }
-                                $stmt->close();
+                                <?php } ?>
 
-                            }
-                            ?>
                                 <i class='bx bx-home-smile icona'></i>
                                 <span class="text nav-text">
                                     <?php if ($_SESSION['ruolo'] == "Paziente") {
@@ -153,11 +159,11 @@ if (isset($_SESSION["codiceFiscale"]) && isset($_SESSION["email"])) {
 
 
     <div id="content" class="riquadri">
-       
+
     </div>
+
+
 </body>
-
-
 
 </html>
 

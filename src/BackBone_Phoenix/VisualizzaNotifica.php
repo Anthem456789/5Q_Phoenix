@@ -30,12 +30,22 @@ $conn = new mysqli($host, $username, $password, $dbname);
     if (isset($_SESSION["codiceFiscale"])) {
         
             
-
+        if($_SESSION["ruolo"] == "Infermiere"){
             /* Prende il ruolo  dell'utente loggato basandosi sul suo codice fiscale*/
             $sql = " SELECT categoria,titolo,descrizione,data_creazione,visualizzato
                 FROM Notifica
+                WHERE categoria = 'Infermiere'
             ";
-    
+        }
+
+        if($_SESSION["ruolo"] == "Paziente"){
+            /* Prende il ruolo  dell'utente loggato basandosi sul suo codice fiscale*/
+            $sql = " SELECT categoria,titolo,descrizione,data_creazione,visualizzato
+                FROM Notifica
+                WHERE categoria = 'Paziente'
+            ";
+        }
+
             /*si prepara lo statement*/ 
             if ($stmt = $conn->prepare($sql)) {
                 /* Associa il parametro alla query (s per string) */
@@ -63,6 +73,12 @@ $conn = new mysqli($host, $username, $password, $dbname);
             else {
                 echo "Errore nella preparazione della query: " . $conn->error;
             }
+        
+
+
+
+
+
     } else {
         echo "Codice fiscale non trovato nella sessione.";
     }

@@ -79,10 +79,10 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = " CREATE TABLE IF NOT EXISTS Prenotazioni (
+$sql = "CREATE TABLE IF NOT EXISTS Prenotazioni (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     codiceFiscale CHAR(20) NOT NULL,
     id_reparto INT(6) NOT NULL,
-    CONSTRAINT ChiaviPrimarie PRIMARY KEY(codiceFiscale, id_reparto),
     CONSTRAINT FK_codiceFiscalesesso FOREIGN KEY(codiceFiscale)
         REFERENCES utenti(codiceFiscale),
     CONSTRAINT FK_Reparto FOREIGN KEY(id_reparto)

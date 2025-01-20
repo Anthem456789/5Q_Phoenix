@@ -1,53 +1,59 @@
 <?php
-session_start();
+header('Content-Type: application/json');
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "5q_ombrello_phoenix";
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = '5q_ombrello_phoenix';
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
+    die(json_encode(['error' => 'Connessione al database fallita: ' . $conn->connect_error]));
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codiceFiscale = isset($_POST['codiceFiscale']) ? $_POST['codiceFiscale'] : null;
+    $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : null;
+    $titolo = isset($_POST['titolo']) ? $_POST['titolo'] : null;
+    $descrizione = isset($_POST['descrizione']) ? $_POST['descrizione'] : null;
+    
+    if (!$codiceFiscale) {
+        echo json_encode(['error' => 'Errore: a']);
+        exit;
+    }
+    if (!$categoria) {
+        echo json_encode(['error' => 'Errore: b']);
+        exit;
+    }
+    if (!$titolo) {
+        echo json_encode(['error' => 'Errore: c']);
+        exit;
+    }
+    if (!$descrizione) {
+        echo json_encode(['error' => 'Errore: d']);
+        exit;
+    }
 
-if (isset($_SESSION["codiceFiscale"])) {
-    $codiceFiscale = $_SESSION["codiceFiscale"];
+ 
+    
 
-    if ($_SESSION['ruolo'] == "Infermiere") {
-        $ruolo = $_SESSION['ruolo'];
-        $TMessaggio = "Stato letto modificato!";
-        $Descrizione = "Lo stato del letto è stato modificato da " . $codiceFiscale;
+    $sql = "INSERT INTO Notifica (codiceFiscale, categoria, titolo, descrizione, visualizzato) 
+            VALUES (?, ?, ?, ?, FALSE)";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("ssss", $codiceFiscale, $categoria, $titolo, $descrizione);
 
-       
-      
-        $sql = "INSERT INTO Notifica (codiceFiscale, categoria, titolo, descrizione, visualizzato) 
-                VALUES (?, ?, ?, ?, FALSE)";
-                
-
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("ssss", $codiceFiscale, $ruolo, $TMessaggio, $Descrizione);
-
-           
-            try {
-                $stmt->execute();
-                echo "Notifica inserita con successo!";
-            } catch (mysqli_sql_exception $e) {
-                echo "Errore nell'inserimento della notifica: " . $e->getMessage();
-            }
-            
-
-            $stmt->close();
-        } else { 
-            echo "Errore nella preparazione della query: " . $conn->error;
+        if ($stmt->execute()) {
+            echo json_encode(['success' => 'Notifica inviata con successo!']);
+        } else {
+            echo json_encode(['error' => 'Errore durante l\'invio della notifica: ' . $stmt->error]);
         }
+        $stmt->close();
     } else {
-        echo "Ruolo non valido per inserire notifiche.";
+        echo json_encode(['error' => 'Errore nella preparazione della query: ' . $conn->error]);
     }
 } else {
-    echo "Codice fiscale non trovato nella sessione.";
+    echo json_encode(['error' => 'Richiesta non andata a buon fine!']);
 }
 
 $conn->close();
