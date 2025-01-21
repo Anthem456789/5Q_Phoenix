@@ -82,11 +82,19 @@ function gestisciPrenotazionePaziente() {
 
 // Funzione per inviare la notifica al paziente
 function inviaNotificaPaziente(codiceFiscale, reparto, titolo, descrizione, categoria) {
+
     const notificaData = new FormData();
+
+    notificaData.append('codiceFiscale', codiceFiscale);
+    notificaData.append('categoria',categoria);
+    notificaData.append('titolo', titolo);
+    notificaData.append('descrizione', descrizione);
+
+    console.log(codiceFiscale);
     
     fetch("Notifiche.php", {
         method: 'POST',
-        body: 'Fiscale=' + codiceFiscale + '&reparto=' + reparto + '&categoria=' + categoria + '&titolo=' + titolo + '&descrizione=' + descrizione
+        body: notificaData
     })
     .then(response => response.json())
     .then(notificaData => {
@@ -106,6 +114,7 @@ function gestisciLetti(idLetto, newStatus) {
     const categoria = document.querySelector('meta[name="ruolo-utente"]').getAttribute('content');
     const titolo = "Stato modificato con successo!";
     const descrizione = "Lo stato del letto è stato modificato con successo!";
+    
 
 
         fetch('BackBone_Phoenix/updateLetto.php', {
@@ -152,7 +161,8 @@ function inviaNotificaInfermiere(CodiceFiscale, categoria, titolo, descrizione) 
     notificaData.append('titolo', titolo);
     notificaData.append('descrizione', descrizione);
     
-    fetch("Notifiche.php", {
+    /* Siccome Infermiere.php è stato chiamato dinamicamente bisogna mettere un percoso assoluto */
+    fetch("/5Q_Phoenix/src/BackBone_Phoenix/Notifiche.php", {
         method: 'POST',
         body: notificaData
     })
@@ -166,5 +176,3 @@ function inviaNotificaInfermiere(CodiceFiscale, categoria, titolo, descrizione) 
     })
     .catch(error => console.error('Errore nell\'invio della notifica:', error));
 }
-
-/* Risolvi invio notifiche Paziente */

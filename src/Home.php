@@ -45,17 +45,17 @@ if ($stmt = $conn->prepare($sql)) {
     /* mette i risulati della riga in un array associativo */
     while ($row = $result->fetch_assoc()) {
         if ($row['tipoRuolo'] === 'Paziente') {
-            $_SESSION['ruolo'] == 'Paziente';
+            $_SESSION['ruolo'] = 'Paziente';
 
         }
         if ($row['tipoRuolo'] === 'Infermiere') {
-            $_SESSION['ruolo'] == 'Infermiere';
+            $_SESSION['ruolo'] = 'Infermiere';
             /* Si chiude il tag php per permettere al link <a> di funzionare in quanto HTML */
         
     }
 
     if ($row['tipoRuolo'] === 'Dottore') {
-        $_SESSION['ruolo'] == 'Dottore';
+        $_SESSION['ruolo'] = 'Dottore';
         /* Si chiude il tag php per permettere al link <a> di funzionare in quanto HTML */
     
 }   
@@ -119,7 +119,7 @@ if ($stmt = $conn->prepare($sql)) {
                     <li class="nav-link">
 
                         <?php 
-                            if ($_SESSION['ruolo'] = 'Paziente') { ?>
+                            if ($_SESSION['ruolo'] == 'Paziente') { ?>
                         <a href="BackBone_Phoenix/Prenotazioni.php">
                             <?php }
                                     /* Inizio codice per Infermiere*/
