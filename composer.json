@@ -1,0 +1,9 @@
+{
+    "name": "andrea/phoenix",
+    "version": "1.0.0",
+    "require": {
+        "php": "^8.0",
+        "monolog/monolog": "^3.0", 
+		 "fakerphp/faker": "^1.20"
+    }
+}
