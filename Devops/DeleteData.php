@@ -19,6 +19,8 @@ $tables = [
     'Patologia_Documenti',
     'utenti_ruoli',
     'Reparto_Letto',
+    'utenti_Dottore',
+    'Dottore_Reparto',
     'Letto',
     'Reparto',
     'Documenti',
@@ -26,7 +28,8 @@ $tables = [
     'Ruoli',
     'Patologia',
     'Notifica',
-    'Prenotazioni'
+    'Prenotazioni',
+    'Dottore'
 ];
 
 foreach ($tables as $table) {
