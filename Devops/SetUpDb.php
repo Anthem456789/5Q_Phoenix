@@ -77,24 +77,6 @@ if ($conn2->query($sql)) {
 }
 
 
-/* ---------------------------------------------------- */
-
-$sql = "CREATE TABLE IF NOT EXISTS Prenotazioni (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    codiceFiscale CHAR(20) NOT NULL,
-    id_reparto INT(6) NOT NULL,
-    CONSTRAINT FK_codiceFiscalesesso FOREIGN KEY(codiceFiscale)
-        REFERENCES utenti(codiceFiscale),
-    CONSTRAINT FK_Reparto FOREIGN KEY(id_reparto)
-        REFERENCES Reparto(id_reparto)
-);";
-
-
-if ($conn2->query($sql)) {
-    echo "Tabella \"Prenotazioni\" creata con successo<br>";
-} else {
-    echo $conn->error;
-}
 
 
 /* ---------------------------------------------------- */
@@ -147,6 +129,67 @@ if ($conn2->query($sql)) {
     echo $conn->error;
 }
 
+/* ---------------------------------------------------- */
+
+$sql = "CREATE TABLE IF NOT EXISTS Prenotazioni (
+    id_reparto INT(6) NOT NULL,
+    codiceFiscale CHAR(20) NOT NULL,
+    data_ora TIME NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    CONSTRAINT FK_codiceFiscalesesso FOREIGN KEY(codiceFiscale)
+        REFERENCES utenti(codiceFiscale),
+    CONSTRAINT FK_Repartobu FOREIGN KEY(id_reparto)
+        REFERENCES Reparto(id_reparto)
+);";
+
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Prenotazioni\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
+
+/* ---------------------------------------------------- */
+
+$sql = "CREATE TABLE IF NOT EXISTS Dottore (
+    id_doc INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(50) NOT NULL,
+    orario_inizio TIME NOT NULL,
+    orario_fine TIME NOT NULL,
+    occupato BOOLEAN NOT NULL DEFAULT FALSE,
+    codiceFiscale VARCHAR(20) NOT NULL,
+    id_reparto INT(6) NOT NULL,
+    CONSTRAINT FK_codiceFiscale_Dottore FOREIGN KEY(codiceFiscale)
+        REFERENCES utenti(codiceFiscale),
+    CONSTRAINT FK_idReparto_Dottore FOREIGN KEY(id_reparto)
+        REFERENCES Reparto(id_reparto)
+);";
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Dottore\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
+
+/* ---------------------------------------------------- */
+
+$sql = " CREATE TABLE IF NOT EXISTS Notifica (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codiceFiscale VARCHAR(20) NOT NULL,
+    categoria VARCHAR(12),
+    titolo VARCHAR(100) NOT NULL,
+    descrizione VARCHAR(3000) NOT NULL,
+    data_creazione DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    visualizzato BOOLEAN DEFAULT FALSE,
+    CONSTRAINT FK_codiceFiscale_Notifica FOREIGN KEY(codiceFiscale)
+          REFERENCES utenti(codiceFiscale)
+);";
+if ($conn2->query($sql)) {
+    echo "Tabella \"Notifica\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
 
 /* ---------------------------------------------------- */
 
@@ -214,24 +257,43 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = " CREATE TABLE IF NOT EXISTS Notifica (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+
+$sql = " CREATE TABLE IF NOT EXISTS utenti_Dottore (
     codiceFiscale VARCHAR(20) NOT NULL,
-    categoria VARCHAR(12),
-    titolo VARCHAR(100) NOT NULL,
-    descrizione VARCHAR(3000) NOT NULL,
-    data_creazione DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    visualizzato BOOLEAN DEFAULT FALSE,
-    CONSTRAINT FK_codiceFiscale_Notifica FOREIGN KEY(codiceFiscale)
-          REFERENCES utenti(codiceFiscale)
+    id_doc INT AUTO_INCREMENT NOT NULL,
+    CONSTRAINT ChiavePrimariaRuoloDoc PRIMARY KEY(codiceFiscale, id_doc),
+    CONSTRAINT FK_codiceFiscale_sussss FOREIGN KEY(codiceFiscale)
+        REFERENCES utenti(codiceFiscale),
+    CONSTRAINT FK_idDoc1 FOREIGN KEY(id_doc)
+        REFERENCES Dottore(id_doc)
 );";
+
+
 if ($conn2->query($sql)) {
-    echo "Tabella \"Notifica\" creata con successo<br>";
+    echo "Tabella \"utenti_Dottore\" creata con successo<br>";
 } else {
     echo $conn->error;
 }
 
+/* ---------------------------------------------------- */
 
+
+$sql = " CREATE TABLE IF NOT EXISTS Dottore_reparto (
+    id_reparto INT(6) NOT NULL,
+    id_doc INT AUTO_INCREMENT NOT NULL,
+    CONSTRAINT ChiavePrimariaRuoloDoc3 PRIMARY KEY(id_reparto, id_doc),
+    CONSTRAINT FK_idREPARTO_Repartomaga FOREIGN KEY(id_reparto)
+        REFERENCES Reparto(id_reparto),
+    CONSTRAINT FK_idDoc2 FOREIGN KEY(id_doc)
+        REFERENCES Dottore(id_doc)
+);";
+
+
+if ($conn2->query($sql)) {
+    echo "Tabella \"Dottore_reparto\" creata con successo<br>";
+} else {
+    echo $conn->error;
+}
 /* ----------Inserimento Dati Significativi--------------- */
 
 $sql = "INSERT IGNORE INTO Ruoli (tipoRuolo, id_ruoli) VALUES
@@ -364,6 +426,19 @@ $sql = "INSERT IGNORE INTO Letto (id_letto, isTaken) VALUES
 
 if ($conn2->query($sql)) {
     echo "Dati inseriti nella tabella \"Letto\" con successo<br>";
+} else {
+    echo $conn2->error;
+}
+
+/* ---------------------------------------------------- */
+
+$sql = "INSERT IGNORE INTO Dottore (nome, cognome, orario_inizio, orario_fine, occupato, codiceFiscale, id_reparto) VALUES
+('Mario', 'Rossi', '08:00:00', '18:00:00', FALSE, 'RSSMRA85M01H501Z', 1),
+('Giovanni', 'Verdi', '09:00:00', '19:00:00', FALSE, 'VRNGNN90A01H501Y', 2),
+('Anna', 'Bianchi', '10:00:00', '20:00:00', FALSE, 'BNCMRA75D01H501X', 3);";
+
+if ($conn2->query($sql)) {
+    echo "Dati inseriti nella tabella \"Dottore\" con successo<br>";
 } else {
     echo $conn2->error;
 }
