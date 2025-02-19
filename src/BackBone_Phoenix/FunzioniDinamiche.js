@@ -37,6 +37,7 @@ function gestisciPrenotazionePaziente() {
 
         const codiceFiscale = document.getElementById('codiceFiscale').value.trim();
         const reparto = document.getElementById('reparto').value.trim();
+        const orario = document.getElementById('orario').value.trim();
         const categoria = document.querySelector('meta[name="ruolo-utente"]').getAttribute('content');
         const titolo = "Prenotazione si!";
         const descrizione = "pute!";
@@ -50,9 +51,11 @@ function gestisciPrenotazionePaziente() {
         const formData = new FormData();
         formData.append('Fiscale', codiceFiscale);
         formData.append('reparto', reparto);
+        formData.append('orario', orario);
         formData.append('categoria', categoria);
         formData.append('titolo', titolo);
         formData.append('descrizione', descrizione);
+    
        
      
         fetch('make-prenotazioni.php', {

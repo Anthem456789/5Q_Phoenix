@@ -18,9 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data
     $codiceFiscale = $_POST['Fiscale'];
     $reparto = $_POST['reparto'];
+    $orario = $_POST['orario'];
 
     // Validate the input data
-    if (empty($codiceFiscale) || empty($reparto)) {
+    if (empty($codiceFiscale) || empty($reparto) || empty($orario)) {
         echo json_encode(['error' => 'Errore: Campi obbligatori mancanti!']);
         exit;
     }
@@ -39,23 +40,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     /* Se è una nuova prenotazione si esegue il codice sottostante */
-    $sql = "INSERT INTO prenotazioni(codiceFiscale, id_reparto) VALUES (?, ?)";
+
+    $sql = "SELECT orario_inizio, orario_fine FROM Dottore WHERE id_reparto = ?";
+    $stmt->close();
+    // Controlla se il dottore è disponibile
+        $sql = "SELECT orario_inizio, orario_fine 
+                FROM Dottore 
+                WHERE id_reparto = ?";
+
+   
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("si", $codiceFiscale, $reparto);
+            $stmt->bind_param("i", $reparto);
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $orario_inizio = $row['orario_inizio'];
+                    $orario_fine = $row['orario_fine'];
+    
+                    if ($orario >= $orario_inizio && $orario <= $orario_fine) { 
+                        $stmt->close();
+                        $stmt->bind_param("sis", $codiceFiscale, $reparto, $orario); 
+                        // Inserisci la prenotazione
+                        $sql = "INSERT INTO prenotazioni (id_reparto, codice_fiscale, data_ora)
+                                VALUES (?, ?, ?)";
 
-        if ($stmt->execute()) {
-            echo json_encode(['success' => 'Prenotazione inserita con successo!']);
-            
-        } else {
-            echo json_encode(['error' => 'Errore durante l\'inserimento: ' . $stmt->error]);
-        }
-        $stmt->close();
-    } else {
-        echo json_encode(['error' => "Errore nella query: " . $conn->error]);
+                        if ($stmt = $conn->prepare($sql)) {
+                            $stmt->bind_param("sss", $reparto, $codiceFiscale, $orario);
+                            if ($stmt->execute()) {
+                                echo json_encode(['success' => 'Prenotazione inserita con successo!']);
+                            } else {
+                                echo json_encode(['error' => 'Errore durante l\'inserimento: ' . $stmt->error]);
+                               
+                            }
+                             $stmt->close();
+                        }
+                    } else {
+                        echo json_encode(['error' => 'Nessun dottore trovato per questo reparto.']);
+                    } 
+                } else {
+                    echo json_encode(['error' => 'Il dottore non è disponibile in quest\'orario.']);
+                }
+            } else {
+                echo json_encode(['error' => "Errore nella query: " . $conn->error]);
+            }
+        } 
     }
-} else {
-    echo json_encode(['error' => "Richiesta non andata a buon fine!"]);
-}
+     $conn->close();
 
-$conn->close();
 ?>

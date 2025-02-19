@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $orarioInput = $_POST["orario"];
 
     // Verifica e formatta l'orario
-    $dateTime = DateTime::createFromFormat('H:i', $orarioInput);
+    $dateTime = DateTime::createFromFormat('H:i:s', $orarioInput);
     if (!$dateTime) {
         die("Formato orario non valido. Utilizzare HH:MM.");
     }
