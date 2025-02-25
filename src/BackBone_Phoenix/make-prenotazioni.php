@@ -59,14 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $orario_fine = $row['orario_fine'];
     
                     if ($orario >= $orario_inizio && $orario <= $orario_fine) { 
-                        $stmt->close();
-                        $stmt->bind_param("sis", $codiceFiscale, $reparto, $orario); 
-                        // Inserisci la prenotazione
-                        $sql = "INSERT INTO prenotazioni (id_reparto, codice_fiscale, data_ora)
+                        $sql = "INSERT INTO prenotazioni (id_reparto, codiceFiscale, data_ora)
                                 VALUES (?, ?, ?)";
-
                         if ($stmt = $conn->prepare($sql)) {
-                            $stmt->bind_param("sss", $reparto, $codiceFiscale, $orario);
+                            $stmt->bind_param("iss", $reparto, $codiceFiscale, $orario);
                             if ($stmt->execute()) {
                                 echo json_encode(['success' => 'Prenotazione inserita con successo!']);
                             } else {
@@ -89,3 +85,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      $conn->close();
 
 ?>
+
