@@ -1,0 +1,1 @@
+{"version":1,"defects":{"TestPrenotazioni::testConnessione":4,"TestPrenotazioni::testOrario":3,"TestPrenotazioni::testQuery":4},"times":{"TestPrenotazioni::testConnessione":0.017,"TestPrenotazioni::testOrario":0.002,"TestPrenotazioni::testQuery":0.005}}
