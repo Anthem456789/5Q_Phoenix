@@ -433,9 +433,9 @@ if ($conn2->query($sql)) {
 /* ---------------------------------------------------- */
 
 $sql = "INSERT IGNORE INTO Dottore (nome, cognome, orario_inizio, orario_fine, occupato, codiceFiscale, id_reparto) VALUES
-('Mario', 'Rossi', '08:00:00', '18:00:00', FALSE, 'RSSMRA85M01H501Z', 1),
-('Giovanni', 'Verdi', '09:00:00', '19:00:00', FALSE, 'VRNGNN90A01H501Y', 2),
-('Anna', 'Bianchi', '10:00:00', '20:00:00', FALSE, 'BNCMRA75D01H501X', 3);";
+('Francesca', 'Colombo', '08:00:00', '18:00:00', FALSE, 'CMLFNC80B01H501W', 1),
+('Elena', 'Pellegrini', '09:00:00', '19:00:00', FALSE, 'PLMZRT88F01H501T', 2),
+('Mario', 'Rossi', '10:00:00', '20:00:00', FALSE, 'RSSMRA85M01H501Z', 3);";
 
 if ($conn2->query($sql)) {
     echo "Dati inseriti nella tabella \"Dottore\" con successo<br>";
