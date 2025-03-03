@@ -127,14 +127,19 @@ if ($stmt = $conn->prepare($sql)) {
                             <a href="#" onclick="caricapagina('BackBone_Phoenix/Infermiere.php')">
                                 <?php } ?>
 
+                                        <?php
+                                            if($_SESSION['ruolo'] == "Dottore"){ ?>
+                                                <a href="BackBone_Phoenix/gestioneCartelle.php">
+                                        <?php   } ?>
+
                                 <i class='bx bx-home-smile icona'></i>
                                 <span class="text nav-text">
                                     <?php if ($_SESSION['ruolo'] == "Paziente") {
                                             echo "Prenota Visita";
                                         } else if ($_SESSION['ruolo'] == "Infermiere") {
                                             echo "Gestione Letti";
-                                        } else {
-                                            echo "Gestione Pazienti(?)";
+                                        } else if ($_SESSION['ruolo'] == "Dottore"){
+                                            echo "Gestione Pazienti";
                                         }
                                         ?>
                                 </span>
