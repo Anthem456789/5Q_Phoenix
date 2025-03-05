@@ -111,6 +111,15 @@ function inviaNotificaPaziente(codiceFiscale, reparto, titolo, descrizione, cate
 }
 
 // Funzione per la gestione dei letti da parte dell'infermiere
+
+function fromInfermiere(id_reparto){
+    
+    fetch(`BackBone_Phoenix/reparto-infermiere.php?id_reparto=${id_reparto}`)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Errore:', error));
+}
+
 function gestisciLetti(idLetto, newStatus) {
 
     const CodiceFiscale = document.querySelector('meta[name="codiceFiscale"]').getAttribute('content');

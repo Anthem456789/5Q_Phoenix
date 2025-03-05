@@ -31,38 +31,25 @@ if (isset($_SESSION['codiceFiscale']) && isset($_SESSION['nome']) && isset($_SES
 echo $_SESSION["ruolo"] . "<br><br>";
 
 
-/* parte di display letti occupati (da migliorare, ovvio) */
+/* Display dei reparti */
+$sql2 = "SELECT id_reparto
+FROM reparto"; 
 
-$sql2 = "SELECT DISTINCT T.id_letto, T.id_reparto , Y.isTaken
-         FROM reparto_letto AS T
-         JOIN letto AS Y 
-         ON T.id_letto = Y.id_letto";
+if($stmt2 = $conn->prepare($sql2)){
+$stmt2->execute();
+$result2 = $stmt2->get_result();
 
-if ($stmt2 = $conn->prepare($sql2)) {
-    $stmt2->execute();
-    $result2 = $stmt2->get_result();
 
-    echo "<div class='letti-container'>";
-
-    while ($row2 = $result2->fetch_assoc()) {
-        $idLetto = htmlspecialchars($row2['id_letto']);
-        $isTaken = $row2['isTaken'];
-
-        echo "<div class= 'letto-box'>";
-        echo "ID letto: " . $row2['id_letto'] . " >>> Reparto: " . $row2['id_reparto'] . "<br>";
-
-        if ($row2['isTaken'] == 1) {
-            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row2['id_letto']}', 0)\">Rilascia</button><br>";
-        } else {
-            echo "<button id='btn-{$row2['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row2['id_letto']}', 1)\">Assegna</button><br>";
-        }
-        echo "</div>";
-    }
-    echo "</div>";
-    $stmt2->close();
+echo "<div class= 'letti-container'>";
+while($row2 = $result2->fetch_assoc()){
+  
+  echo "<div class= 'reparto-box' onclick=fromInfermiere('{$row2['id_reparto']}')>";
+          echo "Reparto N°" . $row2['id_reparto'] . "<br>"; 
+          echo "</div>";
 }
-
-
+echo "<div>";
+$stmt2->close();
+}
 ?>
 
 <script src="FunzioniDinamiche.js" defer></script>
