@@ -74,9 +74,6 @@ if ($stmt = $conn->prepare($sql)) {
     <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/Grafica.css?<?php echo time(); ?>">
     <script src="Backbone_Phoenix/FunzioniDinamiche.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <meta name="ruolo-utente" content="<?php echo $_SESSION['ruolo']; ?>">
-    <meta name="codiceFiscale" content="<?php echo $_SESSION['codiceFiscale']; ?>">
-
 </head>
 
 <body>
@@ -127,14 +124,14 @@ if ($stmt = $conn->prepare($sql)) {
                             <a href="#" onclick="caricapagina('BackBone_Phoenix/Infermiere.php')">
                                 <?php } ?>
 
-                                        <?php
+                                <?php
                                             if($_SESSION['ruolo'] == "Dottore"){ ?>
-                                                <a href="BackBone_Phoenix/gestioneCartelle.php">
-                                        <?php   } ?>
+                                <a href="BackBone_Phoenix/gestioneCartelle.php">
+                                    <?php   } ?>
 
-                                <i class='bx bx-home-smile icona'></i>
-                                <span class="text nav-text">
-                                    <?php if ($_SESSION['ruolo'] == "Paziente") {
+                                    <i class='bx bx-home-smile icona'></i>
+                                    <span class="text nav-text">
+                                        <?php if ($_SESSION['ruolo'] == "Paziente") {
                                             echo "Prenota Visita";
                                         } else if ($_SESSION['ruolo'] == "Infermiere") {
                                             echo "Gestione Letti";
@@ -142,8 +139,8 @@ if ($stmt = $conn->prepare($sql)) {
                                             echo "Gestione Pazienti";
                                         }
                                         ?>
-                                </span>
-                            </a>
+                                    </span>
+                                </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">

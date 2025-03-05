@@ -51,7 +51,7 @@ $conn = new mysqli($host, $username, $password, $dbname);
                 /* Associa il parametro alla query (s per string) */
                 $stmt->execute();
                 $result = $stmt->get_result();
-                echo "<div class='letti-container'>";
+                echo "<div class='Notifica-container'>";
                 /* mette i risulati della riga in un array associativo */
                 while ($row = $result->fetch_assoc()) {
 
@@ -73,11 +73,6 @@ $conn = new mysqli($host, $username, $password, $dbname);
             else {
                 echo "Errore nella preparazione della query: " . $conn->error;
             }
-        
-
-
-
-
 
     } else {
         echo "Codice fiscale non trovato nella sessione.";

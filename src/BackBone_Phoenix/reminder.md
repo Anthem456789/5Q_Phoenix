@@ -1,2 +1,2 @@
-1) Risolvere invio notifiche Paziente. Il problema è che non prende i paramentri per poi mandarli a Notifiche. 
-   Probabilmente si trova nel primo fetch 
+1) Migliorare notifiche: pulire la visuale e mettere chi ha effettuato l'operazione(id dell'utente o codice fiscale)
+2) Migliorare parte Infermiere: aggiungere la possibilità di visualizzare i dati del paziente, come id e file che espliciti cosa ha bisogno, nel letto assegnato dall'infermiere o se già assegnato dal dottore( funzionalità da verificare la fattibilità)

@@ -1,6 +1,5 @@
-
-
 <?php
+
 
 session_start();
 
@@ -16,6 +15,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 <!DOCTYPE html>
 <html lang="it">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="Grafica.css?<?php echo time(); ?>">
+</head>
 <?php
 
 if (isset($_SESSION['codiceFiscale']) && isset($_SESSION['nome']) && isset($_SESSION['cognome']) && isset($_SESSION['email']) && isset($_SESSION['ruolo'])) {
@@ -40,10 +43,13 @@ $stmt2->execute();
 $result2 = $stmt2->get_result();
 
 
-echo "<div class= 'letti-container'>";
+echo "<div class= 'reparti-container'>";
 while($row2 = $result2->fetch_assoc()){
-  
-  echo "<div class= 'reparto-box' onclick=fromInfermiere('{$row2['id_reparto']}')>";
+    
+    /* Percorso assoluto poichè Infermiere è chiamato dinamicamente
+    *  Si passa id reparto tramite URI (Protocollo REST) al reparto-infermiere
+    */
+    echo "<div class='reparto-box' onclick=\"window.location.href='/5Q_Phoenix/src/BackBone_Phoenix/reparto-infermiere.php?id_reparto=" . $row2['id_reparto'] . "';\">";
           echo "Reparto N°" . $row2['id_reparto'] . "<br>"; 
           echo "</div>";
 }

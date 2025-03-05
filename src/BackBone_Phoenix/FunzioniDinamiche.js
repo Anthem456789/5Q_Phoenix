@@ -4,7 +4,7 @@ function caricapagina(pg) {
     const content = document.getElementById('content');
     var richiesta = new XMLHttpRequest();
     richiesta.open('GET', pg, true);
-    richiesta.onreadystatechange = function() {
+    richiesta.onreadystatechange = function () {
         if (richiesta.readyState == 4 && richiesta.status == 200) {
             content.innerHTML = richiesta.responseText;
         }
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Funzione per la gestione delle prenotazioni del paziente
 function gestisciPrenotazionePaziente() {
     const form = document.getElementById('prenotazioniForm');
-    
+
     form.addEventListener('submit', function (event) {
         event.preventDefault();  // Prevenire il comportamento predefinito del form
 
@@ -55,31 +55,31 @@ function gestisciPrenotazionePaziente() {
         formData.append('categoria', categoria);
         formData.append('titolo', titolo);
         formData.append('descrizione', descrizione);
-    
-       
-     
+
+
+
         fetch('make-prenotazioni.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())  
-        .then(data => {
-            console.log('Dati ricevuti:', data); // debug
-            if (data.success) {
-                document.getElementById('resultPrenotazioni').innerHTML = data.success;
-            } else if (data.error) {
-                document.getElementById('resultPrenotazioni').innerHTML = data.error;
-            } else {
-                document.getElementById('resultPrenotazioni').innerHTML = 'Errore sconosciuto.';
-            }
-            form.reset();
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dati ricevuti:', data); // debug
+                if (data.success) {
+                    document.getElementById('resultPrenotazioni').innerHTML = data.success;
+                } else if (data.error) {
+                    document.getElementById('resultPrenotazioni').innerHTML = data.error;
+                } else {
+                    document.getElementById('resultPrenotazioni').innerHTML = 'Errore sconosciuto.';
+                }
+                form.reset();
 
-            inviaNotificaPaziente(codiceFiscale,reparto,titolo,descrizione,categoria);
-        })
-        .catch(error => {
-            console.error('Errore durante la richiesta:', error);
-            document.getElementById('resultPrenotazioni').innerHTML = 'Si è verificato un errore.';
-        });
+                inviaNotificaPaziente(codiceFiscale, reparto, titolo, descrizione, categoria);
+            })
+            .catch(error => {
+                console.error('Errore durante la richiesta:', error);
+                document.getElementById('resultPrenotazioni').innerHTML = 'Si è verificato un errore.';
+            });
     });
 }
 
@@ -89,36 +89,28 @@ function inviaNotificaPaziente(codiceFiscale, reparto, titolo, descrizione, cate
     const notificaData = new FormData();
 
     notificaData.append('codiceFiscale', codiceFiscale);
-    notificaData.append('categoria',categoria);
+    notificaData.append('categoria', categoria);
     notificaData.append('titolo', titolo);
     notificaData.append('descrizione', descrizione);
 
     console.log(codiceFiscale);
-    
+
     fetch("Notifiche.php", {
         method: 'POST',
         body: notificaData
     })
-    .then(response => response.json())
-    .then(notificaData => {
-        if (notificaData.success) {
-            console.log('Notifica inviata con successo');    
-        } else {
-            console.error('Errore nell\'invio della notifica:', notificaData.error);
-        }
-    })
-    .catch(error => console.error('Errore nell\'invio della notifica:', error));
+        .then(response => response.json())
+        .then(notificaData => {
+            if (notificaData.success) {
+                console.log('Notifica inviata con successo');
+            } else {
+                console.error('Errore nell\'invio della notifica:', notificaData.error);
+            }
+        })
+        .catch(error => console.error('Errore nell\'invio della notifica:', error));
 }
 
 // Funzione per la gestione dei letti da parte dell'infermiere
-
-function fromInfermiere(id_reparto){
-    
-    fetch(`BackBone_Phoenix/reparto-infermiere.php?id_reparto=${id_reparto}`)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Errore:', error));
-}
 
 function gestisciLetti(idLetto, newStatus) {
 
@@ -126,14 +118,14 @@ function gestisciLetti(idLetto, newStatus) {
     const categoria = document.querySelector('meta[name="ruolo-utente"]').getAttribute('content');
     const titolo = "Stato modificato con successo!";
     const descrizione = "Lo stato del letto è stato modificato con successo!";
-    
 
 
-        fetch('BackBone_Phoenix/updateLetto.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'id_letto=' + idLetto + '&isTaken=' + newStatus + '&codiceFiscale=' + CodiceFiscale + '&categoria=' + categoria + '&titolo=' + titolo + '&descrizione=' + descrizione
-        })
+
+    fetch('updateLetto.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'id_letto=' + idLetto + '&isTaken=' + newStatus + '&codiceFiscale=' + CodiceFiscale + '&categoria=' + categoria + '&titolo=' + titolo + '&descrizione=' + descrizione
+    })
         .then(response => response.text())
         .then(data => {
             if (data.includes('Stato aggiornato correttamente!')) {
@@ -141,12 +133,12 @@ function gestisciLetti(idLetto, newStatus) {
                 if (button) {
                     if (newStatus == 1) {
                         button.textContent = "Rilascia";
-                        button.setAttribute('onclick', `aggiorna('${idLetto}', 0)`);
-                        inviaNotificaInfermiere(CodiceFiscale,categoria,titolo,descrizione);
+                        button.setAttribute('onclick', `gestisciLetti('${idLetto}', 0)`);
+                        inviaNotificaInfermiere(CodiceFiscale, categoria, titolo, descrizione);
                     } else {
                         button.textContent = "Assegna";
-                        button.setAttribute('onclick', `aggiorna('${idLetto}', 1)`);
-                        inviaNotificaInfermiere(CodiceFiscale,categoria,titolo,descrizione);
+                        button.setAttribute('onclick', `gestisciLetti('${idLetto}', 1)`);
+                        inviaNotificaInfermiere(CodiceFiscale, categoria, titolo, descrizione);
                     }
                 }
             } else {
@@ -158,33 +150,33 @@ function gestisciLetti(idLetto, newStatus) {
             console.error('Errore:', error);
             alert('Si è verificato un errore. Riprova.');
         });
-        
-        console.log("Codice per infermiere caricato.");
-    }
-    
+
+    console.log("Codice per infermiere caricato.");
+}
+
 
 // Funzione per inviare la notifica all'infermiere
 function inviaNotificaInfermiere(CodiceFiscale, categoria, titolo, descrizione) {
-    
+
     const notificaData = new FormData();
-    
+
     notificaData.append('codiceFiscale', CodiceFiscale);
-    notificaData.append('categoria',categoria);
+    notificaData.append('categoria', categoria);
     notificaData.append('titolo', titolo);
     notificaData.append('descrizione', descrizione);
-    
+
     /* Siccome Infermiere.php è stato chiamato dinamicamente bisogna mettere un percoso assoluto */
     fetch("/5Q_Phoenix/src/BackBone_Phoenix/Notifiche.php", {
         method: 'POST',
         body: notificaData
     })
-    .then(response => response.json())
-    .then(notificaData => {
-        if (notificaData.success) {
-            console.log('Notifica inviata con successo');    
-        } else {
-            console.error('Errore nell\'invio della notifica:', notificaData.error);
-        }
-    })
-    .catch(error => console.error('Errore nell\'invio della notifica:', error));
+        .then(response => response.json())
+        .then(notificaData => {
+            if (notificaData.success) {
+                console.log('Notifica inviata con successo');
+            } else {
+                console.error('Errore nell\'invio della notifica:', notificaData.error);
+            }
+        })
+        .catch(error => console.error('Errore nell\'invio della notifica:', error));
 }

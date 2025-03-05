@@ -96,24 +96,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
             <script>
             function aggiungiSecondi() {
-        // Ottieni il valore dell'orario
-        const orarioInput = document.getElementById("orario").value;
+                // Ottieni il valore dell'orario
+                const orarioInput = document.getElementById("orario").value;
 
-        // Aggiungi i secondi manualmente
-        const orarioConSecondi = orarioInput + ":00";
+                // Aggiungi i secondi manualmente
+                const orarioConSecondi = orarioInput + ":00";
 
-        // Assegna il nuovo valore al campo nascosto
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "orarioConSecondi";
-        hiddenInput.value = orarioConSecondi;
+                // Assegna il nuovo valore al campo nascosto
+                const hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "orarioConSecondi";
+                hiddenInput.value = orarioConSecondi;
 
-        // Aggiungi il campo nascosto al form
-        document.getElementById("prenotazioniForm").appendChild(hiddenInput);
+                // Aggiungi il campo nascosto al form
+                document.getElementById("prenotazioniForm").appendChild(hiddenInput);
 
-        return true; // Invia il form
-    }
-</script>
+                return true; // Invia il form
+            }
+            </script>
         </div>
     </div>
 
