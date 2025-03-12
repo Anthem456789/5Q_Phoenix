@@ -94,6 +94,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="time" id="orario" name="orario" placeholder="Orario della prenotazione" required><br>
                 <button type="submit">Prenota</button>
             </form>
+
+        
+  
+            <div class="container-Prenotazioni">
+                <?php
+                /* sistemare */
+                $sql = "SELECT * from prenotazioni where codiceFiscale = ?";
+
+                if($stmt = $conn->prepare($sql)){
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                while($row = $conn->prepare($sql)){
+                    echo  "<div class='prenotazione-box'>";
+                    echo "Prenotazione fatta per l'orario". $row["data_ora"]. ", nel reparto: ". $row["id_reparto"];
+                    echo "</div>";
+                }
+                }
+            ?>
+            </div>
+
             <script>
             function aggiungiSecondi() {
                 // Ottieni il valore dell'orario

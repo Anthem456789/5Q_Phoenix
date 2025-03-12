@@ -49,7 +49,7 @@ while($row2 = $result2->fetch_assoc()){
     /* Percorso assoluto poichè Infermiere è chiamato dinamicamente
     *  Si passa id reparto tramite URI (Protocollo REST) al reparto-infermiere
     */
-    echo "<div class='reparto-box' onclick=\"window.location.href='/5Q_Phoenix/src/BackBone_Phoenix/reparto-infermiere.php?id_reparto=" . $row2['id_reparto'] . "';\">";
+    echo "<div class='reparto-box' onclick=\"window.location.href='/src/BackBone_Phoenix/reparto-infermiere.php?id_reparto=" . $row2['id_reparto'] . "';\">";
           echo "Reparto N°" . $row2['id_reparto'] . "<br>"; 
           echo "</div>";
 }
