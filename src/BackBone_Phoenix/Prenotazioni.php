@@ -1,5 +1,7 @@
 <?php
-session_start();
+include "../functionLog.php";
+
+checkLog();
 
 if (!isset($_SESSION["codiceFiscale"])) {
     die("Utente non loggato.");

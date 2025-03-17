@@ -1,4 +1,9 @@
 <?php
+
+include "../functionLog.php";
+
+checkLog();
+
 header('Content-Type: application/json');
 
 $host = 'localhost';

@@ -1,4 +1,8 @@
 <?php
+include "../functionLog.php";
+
+checkLog();
+
 $host = 'localhost';
 $username = 'root';
 $password = '';

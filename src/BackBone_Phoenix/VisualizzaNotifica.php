@@ -1,5 +1,7 @@
 <?php
-session_start();
+include "../functionLog.php";
+
+checkLog();
 
 $host = "localhost";
 $username = "root";
