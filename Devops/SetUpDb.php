@@ -23,7 +23,7 @@ if ($conn->query($sql)) {
 $conn2 = new mysqli($serverName, $username, $password, $db_name);
 
 $sql = " CREATE TABLE IF NOT EXISTS utenti (
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     nome VARCHAR(100) DEFAULT NULL,
     cognome VARCHAR(50) DEFAULT NULL,
     data_nascita DATE NOT NULL,
@@ -63,7 +63,7 @@ if ($conn2->query($sql)) {
 
 $sql = " CREATE TABLE IF NOT EXISTS Documenti (
     id_documento INT(6) NOT NULL,
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     CONSTRAINT ChiavePrimariaDoc PRIMARY KEY(id_documento),
     CONSTRAINT FK_codiceFiscale FOREIGN KEY(codiceFiscale)
         REFERENCES utenti(codiceFiscale)
@@ -133,7 +133,7 @@ if ($conn2->query($sql)) {
 
 $sql = "CREATE TABLE IF NOT EXISTS Prenotazioni (
     id_reparto INT(6) NOT NULL,
-    codiceFiscale CHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     data_ora TIME NOT NULL,
     id INT AUTO_INCREMENT PRIMARY KEY,
     CONSTRAINT FK_codiceFiscalesesso FOREIGN KEY(codiceFiscale)
@@ -158,7 +158,7 @@ $sql = "CREATE TABLE IF NOT EXISTS Dottore (
     orario_inizio TIME NOT NULL,
     orario_fine TIME NOT NULL,
     occupato BOOLEAN NOT NULL DEFAULT FALSE,
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     id_reparto INT(6) NOT NULL,
     CONSTRAINT FK_codiceFiscale_Dottore FOREIGN KEY(codiceFiscale)
         REFERENCES utenti(codiceFiscale),
@@ -176,7 +176,7 @@ if ($conn2->query($sql)) {
 
 $sql = " CREATE TABLE IF NOT EXISTS Notifica (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     categoria VARCHAR(12),
     titolo VARCHAR(100) NOT NULL,
     descrizione VARCHAR(3000) NOT NULL,
@@ -215,7 +215,7 @@ if ($conn2->query($sql)) {
 
 
 $sql = " CREATE TABLE IF NOT EXISTS utenti_ruoli (
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     id_ruoli INT(6) NOT NULL,
     CONSTRAINT ChiavePrimariaRuoloUtente PRIMARY KEY(codiceFiscale, id_ruoli),
     CONSTRAINT FK_codiceFiscale_utenti FOREIGN KEY(codiceFiscale)
@@ -238,7 +238,7 @@ if ($conn2->query($sql)) {
 $sql = " CREATE TABLE IF NOT EXISTS Patologia_Documenti (
     id_documento INT(6) NOT NULL,
     id_malattia INT(6) NOT NULL,
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     CONSTRAINT ChiavePrimariaDoc PRIMARY KEY(id_documento, id_malattia),
     CONSTRAINT FK_idDocumento_test FOREIGN KEY(id_documento)
         REFERENCES Documenti(id_documento),
@@ -259,7 +259,7 @@ if ($conn2->query($sql)) {
 
 
 $sql = " CREATE TABLE IF NOT EXISTS utenti_Dottore (
-    codiceFiscale VARCHAR(20) NOT NULL,
+    codiceFiscale CHAR(16) NOT NULL,
     id_doc INT AUTO_INCREMENT NOT NULL,
     CONSTRAINT ChiavePrimariaRuoloDoc PRIMARY KEY(codiceFiscale, id_doc),
     CONSTRAINT FK_codiceFiscale_sussss FOREIGN KEY(codiceFiscale)
