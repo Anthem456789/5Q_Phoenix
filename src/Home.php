@@ -117,16 +117,16 @@ if ($stmt = $conn->prepare($sql)) {
 
                         <?php 
                             if ($_SESSION['ruolo'] == 'Paziente') { ?>
-                        <a href="BackBone_Phoenix/Prenotazioni.php">
+                        <a href="BackBone_Phoenix/Paziente/Prenotazioni.php">
                             <?php }
                                     /* Inizio codice per Infermiere*/
                                     if ($_SESSION['ruolo'] == 'Infermiere') { ?>
-                            <a href="#" onclick="caricapagina('BackBone_Phoenix/Infermiere.php')">
+                            <a href="#" onclick="caricapagina('BackBone_Phoenix/Indermiere/Infermiere.php')">
                                 <?php } ?>
 
                                 <?php
                                             if($_SESSION['ruolo'] == "Dottore"){ ?>
-                                <a href="BackBone_Phoenix/gestioneCartelle.php">
+                                <a href="BackBone_Phoenix/Dottore/Cartelle.php">
                                     <?php   } ?>
 
                                     <i class='bx bx-home-smile icona'></i>
