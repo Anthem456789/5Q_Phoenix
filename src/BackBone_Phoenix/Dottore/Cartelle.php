@@ -4,23 +4,28 @@ session_start();
 $conn = new mysqli("localhost", "root", "", "5q_ombrello_phoenix");
 
 // CREAZIONE CARTELLA CLINICA
-if(isset($_POST['crea_cartella'])) {
-    if($_SESSION['user']['ruolo'] === 'dottore') {
-        $stmt = $conn->prepare("INSERT INTO Documenti 
-            (codiceFiscale, contenuto, id_dottore) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", 
-            $_POST['paziente_cf'],
-            $_POST['contenuto'],
-            $_SESSION['user']['id_dottore']
-        );
+if(isset($_POST['crea_cartella']) && $_SESSION['user']['ruolo'] === 'dottore') {
+    $paziente_cf = sanitize($_POST['paziente_cf']);
+    $contenuto = sanitize($_POST['contenuto']);
+    $id_malattia = (int) $_POST['malattia']; // Convertito in intero per sicurezza
+    $id_dottore = $_SESSION['user']['id_dottore'];
+
+    if(empty($paziente_cf) || empty($contenuto) || !$id_malattia) {
+        echo "<p style='color:red;'>Dati mancanti o errati.</p>";
+    } else {
+        $stmt = $conn->prepare("INSERT INTO Documenti (codiceFiscale, contenuto, id_dottore) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $paziente_cf, $contenuto, $id_dottore);
         $stmt->execute();
-        
-        $id_documento = $conn->insert_id;
-        
-        $stmt = $conn->prepare("INSERT INTO Patologia_Documenti 
-            (id_documento, id_malattia, codiceFiscale) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $id_documento, $_POST['malattia'], $_POST['paziente_cf']);
-        $stmt->execute();
+
+        if($stmt->affected_rows > 0) {
+            $id_documento = $conn->insert_id;
+            $stmt = $conn->prepare("INSERT INTO Patologia_Documenti (id_documento, id_malattia, codiceFiscale) VALUES (?, ?, ?)");
+            $stmt->bind_param("iis", $id_documento, $id_malattia, $paziente_cf);
+            $stmt->execute();
+            echo "<p style='color:green;'>Cartella creata con successo.</p>";
+        } else {
+            echo "<p style='color:red;'>Errore nella creazione della cartella.</p>";
+        }
     }
 }
 
@@ -115,6 +120,28 @@ if(isset($_POST['login'])) {
     </script>
 
 <?php endif; ?>
+
+<script TYPE="text/javascript">
+function mostra(str) {
+    if (str.length == 0) {
+        document.getElementById("elenco").innerHTML = "";
+        return;
+    }
+
+    let ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            document.getElementById("elenco").innerHTML = ajax.responseText;
+        }
+    };
+    ajax.open("GET", "gestioneCartelle.php?stringa=" + encodeURIComponent(str), true);
+    ajax.send();
+}
+
+</script>
+ <P><B>Località da cercare:</B></P>
+ <FORM> nome: <INPUT TYPE="text" onkeyup="mostra(this.value)"></FORM>
+ <P>Doc suggeriti: <div class = "box" id="elenco"></div></p>
 
 </body>
 </html>
