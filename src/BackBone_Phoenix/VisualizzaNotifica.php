@@ -1,7 +1,6 @@
 <?php
+session_start();
 include "../functionLog.php";
-
-checkLog();
 
 $host = "localhost";
 $username = "root";
@@ -22,7 +21,7 @@ $conn = new mysqli($host, $username, $password, $dbname);
     <title>Notifiche</title>
     <!-- Link al css da redifinire successivamente-->
     <!--link rel="stylesheet" type="text/css" href="Grafica/home.css?<?php echo time(); ?>-->
-    <script src="FunzioniDinamiche.js" defer></script>
+    <script src="../js/FunzioniDinamiche.js" defer></script>
 </head>
 
 <body>

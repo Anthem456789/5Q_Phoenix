@@ -1,16 +1,8 @@
 <?php
 
-include "../functionLog.php";
+include "../../functionLog.php";
 
-checkLog();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "5q_ombrello_phoenix";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+include_once "../Generale/Db.php";
 
 ?>
 
@@ -22,11 +14,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
     <meta charset="UTF-8">
     <meta name="ruolo-utente" content="<?php echo $_SESSION['ruolo']; ?>">
     <meta name="codiceFiscale" content="<?php echo $_SESSION['codiceFiscale']; ?>">
-    <link rel="stylesheet" type="text/css" href="Grafica.css?<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../css/Grafica.css?<?php echo time(); ?>">
 </head>
 
 <header class="header-repartoInfermiere">
-    <a href="../Home.php"> Torna indietro</a>
+    <a href="../../Home.php"> Torna indietro</a>
 </header>
 
 <body>
@@ -88,7 +80,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
     ?>
 </body>
-<script src="FunzioniDinamiche.js" defer></script>
+<script src="../js/FunzioniDinamiche.js" defer></script>
 
 
 </html>

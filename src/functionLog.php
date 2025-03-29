@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 function debug_to_console($data) {
     $output = $data;
@@ -10,7 +9,7 @@ function debug_to_console($data) {
 }
 
 
-
+/*
 function checkLog(){
     if(isset($_SESSION["codiceFiscale"]) && isset($_SESSION["email"])){
         debug_to_console("bene");
@@ -19,7 +18,7 @@ function checkLog(){
         exit();
     }
 }
-
+*/
 
 function myExecute($stmt){
     $stmt->execute();

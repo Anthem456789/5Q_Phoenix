@@ -2,7 +2,6 @@
 
 include "../functionLog.php";
 
-checkLog();
 
 header('Content-Type: application/json');
 

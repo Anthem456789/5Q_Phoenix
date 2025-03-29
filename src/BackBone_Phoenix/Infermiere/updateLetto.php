@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt = $conn->prepare($sqlUpdate)) {
         $stmt->bind_param("ii", $isTaken, $idLetto);
         $stmt->execute();
-        include 'Notifiche.php';
+        include '../Generale/Notifiche.php';
         echo "Stato aggiornato correttamente!";
         $stmt->close();
         

@@ -71,8 +71,8 @@ if ($stmt = $conn->prepare($sql)) {
     <meta charset="UTF-8">
     <title>Home</title>
     <!-- Link al css da redifinire successivamente-->
-    <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/Grafica.css?<?php echo time(); ?>">
-    <script src="Backbone_Phoenix/FunzioniDinamiche.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/css/Grafica.css?<?php echo time(); ?>">
+    <script src="Backbone_Phoenix/js/FunzioniDinamiche.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
@@ -121,7 +121,7 @@ if ($stmt = $conn->prepare($sql)) {
                             <?php }
                                     /* Inizio codice per Infermiere*/
                                     if ($_SESSION['ruolo'] == 'Infermiere') { ?>
-                            <a href="#" onclick="caricapagina('BackBone_Phoenix/Indermiere/Infermiere.php')">
+                            <a href="#" onclick="caricapagina('BackBone_Phoenix/Infermiere/Infermiere.php')">
                                 <?php } ?>
 
                                 <?php
@@ -149,7 +149,7 @@ if ($stmt = $conn->prepare($sql)) {
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="BackBone_Phoenix/Logout.php" class="Button">
+                        <a href="Logout.php" class="Button">
                             <i class='bx bx-home-smile icona'></i>
                             <span class="text nav-text">Logout</span>
                         </a>

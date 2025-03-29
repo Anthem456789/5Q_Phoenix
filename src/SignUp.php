@@ -9,7 +9,7 @@
 <body>
  
 
-<form action="BackBone_Phoenix/CheckSignUp.php" method="POST">
+<form action="BackBone_Phoenix/Generale/CheckSignUp.php" method="POST">
 <h2>Benvenuto</h2>
 <?php if(isset($_GET['error'])) { ?>
   <p class="error"><?php echo $_GET['error']; ?></p>

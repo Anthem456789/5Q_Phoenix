@@ -1,17 +1,8 @@
 <?php
 
 
-include "../functionLog.php";
-
-checkLog();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "5q_ombrello_phoenix";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+include "../../functionLog.php";
+include "display_reparto.php";
 
 ?>
 
@@ -35,32 +26,25 @@ if (isset($_SESSION['codiceFiscale']) && isset($_SESSION['nome']) && isset($_SES
 
 echo $_SESSION["ruolo"] . "<br><br>";
 
-
-/* Display dei reparti */
-$sql2 = "SELECT id_reparto
-FROM reparto"; 
-
-if($stmt2 = $conn->prepare($sql2)){
-$stmt2->execute();
-$result2 = $stmt2->get_result();
-
-
-echo "<div class= 'reparti-container'>";
-while($row2 = $result2->fetch_assoc()){
-    
-    /* Percorso assoluto poichè Infermiere è chiamato dinamicamente
-    *  Si passa id reparto tramite URI (Protocollo REST) al reparto-infermiere
-    */
-    echo "<div class='reparto-box' onclick=\"window.location.href='/src/BackBone_Phoenix/reparto-infermiere.php?id_reparto=" . $row2['id_reparto'] . "';\">";
-          echo "Reparto N°" . $row2['id_reparto'] . "<br>"; 
-          echo "</div>";
-}
-echo "<div>";
-$stmt2->close();
-}
 ?>
 
-<script src="FunzioniDinamiche.js" defer></script>
+
+<div class= 'reparti-container'>
+
+    
+    <!-- Percorso assoluto poichè Infermiere è chiamato dinamicamente
+    *  Si passa id reparto tramite URI (Protocollo REST) al reparto-infermiere
+    -->
+    <?php for($i=0; $i<sizeof($reparti); $i++) : ?>
+        <div class='reparto-box' onclick="window.location.href='/src/BackBone_Phoenix/Infermiere/reparto-infermiere.php?id_reparto=<?= htmlspecialchars($reparti[$i]) ?>';">
+          Reparto N°<?= htmlspecialchars($reparti[$i]) ?>
+    </div>
+
+    <?php endfor; ?>
+
+<div>
+
+<script src="../js/FunzioniDinamiche.js" defer></script>
 
 
 </html>
