@@ -2,8 +2,6 @@
 
 include "../functionLog.php";
 
-checkLog();
-
 /* Si mette il tipo di contenuto, non più come "html response", per le risposte Json */
 header('Content-Type: application/json');
 

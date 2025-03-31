@@ -47,6 +47,14 @@ $conn = new mysqli($host, $username, $password, $dbname);
             ";
         }
 
+        if($_SESSION["ruolo"] == "Dottore"){
+            /* Prende il ruolo  dell'utente loggato basandosi sul suo codice fiscale*/
+            $sql = " SELECT categoria,titolo,descrizione,data_creazione,visualizzato
+                FROM Notifica
+                WHERE categoria = 'Dottore'
+            ";
+        }
+
             /*si prepara lo statement*/ 
             if ($stmt = $conn->prepare($sql)) {
                 /* Associa il parametro alla query (s per string) */

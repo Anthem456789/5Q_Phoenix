@@ -58,7 +58,7 @@ function gestisciPrenotazionePaziente() {
 
 
 
-        fetch('make-prenotazioni.php', {
+        fetch('../Paziente/make-prenotazioni.php', {
             method: 'POST',
             body: formData
         })

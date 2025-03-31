@@ -1,4 +1,6 @@
 <?php
+/* da pdd sistemare */
+include "../Generale/Db.php"; 
 
 if (!isset($_SESSION["codiceFiscale"])) {
     die("Utente non loggato.");
@@ -6,16 +8,6 @@ if (!isset($_SESSION["codiceFiscale"])) {
 
 $codiceFiscale = $_SESSION["codiceFiscale"];
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "5q_ombrello_phoenix";
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reparto = $_POST["reparto"];
@@ -75,14 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prenotazione Visite Mediche</title>
-    <link rel="stylesheet" type="text/css" href="Grafica.css?<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../css/Grafica.css?">
     <meta name="ruolo-utente" content="<?php echo $_SESSION['ruolo']; ?>">
     <meta name="codiceFiscale" content="<?php echo $_SESSION['codiceFiscale']; ?>">
 </head>
 
 <body id="Prenotazioni-body">
     <div class="headerPrenotazioni">
-        <a href="../Home.php" id="buttonPrenotazioni">Torna alla Home</a>
+        <a href="../../Home.php" id="buttonPrenotazioni">Torna alla Home</a>
         <button id="ToggleBox">Effettua Prenotazione</button>
         <div id="popupBox" class="invisible">
             <form id="prenotazioniForm" method="post">
@@ -99,13 +91,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="container-Prenotazioni">
                 <?php
                 /* sistemare */
-                $sql = "SELECT * from prenotazioni where codiceFiscale = ?";
+                $sql = "SELECT * from prenotazioni WHERE codiceFiscale = ?";
 
                 if($stmt = $conn->prepare($sql)){
+                    $stmt->bind_param("s", $codiceFiscale);
                     $stmt->execute();
                     $result = $stmt->get_result();
 
-                while($row = $conn->prepare($sql)){
+
+                while($row = $result->fetch_assoc()){
                     echo  "<div class='prenotazione-box'>";
                     echo "Prenotazione fatta per l'orario". $row["data_ora"]. ", nel reparto: ". $row["id_reparto"];
                     echo "</div>";
@@ -137,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <script src="FunzioniDinamiche.js?v=1.1" defer></script>
+    <script src="../js/FunzioniDinamiche.js" defer></script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -145,6 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (toggleButton) {
             toggleButton.addEventListener("click", function() {
+                console.log("Pulsante cliccato");
                 const popupBox = document.getElementById("popupBox");
                 popupBox.classList.toggle("invisible");
             });

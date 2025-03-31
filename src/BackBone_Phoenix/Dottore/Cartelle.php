@@ -97,7 +97,7 @@ if(isset($_POST['login'])) {
     <!-- INTERFACCIA PRINCIPALE -->
     <header>
         <h1>Benvenuto, <?= $_SESSION['user']['cf'] ?></h1>
-        <a href="?logout">Logout</a>
+        <a href="../../Home.php">Torna indietro</a>
     </header>
 
     <?php if($_SESSION['user']['ruolo'] === 'dottore'): ?>
