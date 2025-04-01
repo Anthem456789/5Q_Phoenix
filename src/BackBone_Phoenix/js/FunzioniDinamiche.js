@@ -38,11 +38,12 @@ function gestisciPrenotazionePaziente() {
         const codiceFiscale = document.getElementById('codiceFiscale').value.trim();
         const reparto = document.getElementById('reparto').value.trim();
         const orario = document.getElementById('orario').value.trim();
+        /* Non prende il contenuto */
         const categoria = document.querySelector('meta[name="ruolo-utente"]').getAttribute('content');
         const titolo = "Prenotazione si!";
         const descrizione = "pute!";
 
-        // Verifica che entrambi i campi siano compilati
+    
         if (!codiceFiscale || !reparto) {
             alert("Entrambi i campi sono obbligatori!");
             return;
@@ -62,24 +63,23 @@ function gestisciPrenotazionePaziente() {
             method: 'POST',
             body: formData
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dati ricevuti:', data); // debug
-                if (data.success) {
-                    document.getElementById('resultPrenotazioni').innerHTML = data.success;
-                } else if (data.error) {
-                    document.getElementById('resultPrenotazioni').innerHTML = data.error;
-                } else {
-                    document.getElementById('resultPrenotazioni').innerHTML = 'Errore sconosciuto.';
-                }
-                form.reset();
-
-                inviaNotificaPaziente(codiceFiscale, reparto, titolo, descrizione, categoria);
-            })
-            .catch(error => {
-                console.error('Errore durante la richiesta:', error);
-                document.getElementById('resultPrenotazioni').innerHTML = 'Si è verificato un errore.';
-            });
+        .then(response => response.json())  
+        .then(data => {
+            console.log("Risposta server:", data); 
+        
+            if (data.success) {
+                document.getElementById('resultPrenotazioni').innerHTML = `<span style="color:green;">${data.success}</span>`;
+                inviaNotificaPaziente(codiceFiscale, categoria, titolo, descrizione);
+            } else if (data.error) {
+                document.getElementById('resultPrenotazioni').innerHTML = `<span style="color:red;">${data.error}</span>`;
+            } else {
+                document.getElementById('resultPrenotazioni').innerHTML = "Errore sconosciuto.";
+            }
+        })
+        .catch(error => {
+            console.error('Errore durante la richiesta:', error);
+            document.getElementById('resultPrenotazioni').innerHTML = 'Si è verificato un errore nella richiesta.';
+        });
     });
 }
 
@@ -95,7 +95,7 @@ function inviaNotificaPaziente(codiceFiscale, reparto, titolo, descrizione, cate
 
     console.log(codiceFiscale);
 
-    fetch("Notifiche.php", {
+    fetch("../Generale/Notifiche.php", {
         method: 'POST',
         body: notificaData
     })
