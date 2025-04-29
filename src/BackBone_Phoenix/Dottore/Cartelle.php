@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+include "../Infermiere/display_reparto.php"; //aggiunto di recente 
+
 $conn = new mysqli("localhost", "root", "", "5q_ombrello_phoenix");
 
 // CREAZIONE CARTELLA CLINICA
@@ -115,6 +117,19 @@ if(isset($_POST['login'])) {
             <textarea name="contenuto" rows="6" placeholder="Contenuto cartella..." required></textarea>
             <button type="submit" name="crea_cartella">Salva Cartella</button>
         </form>
+
+        <!-- logica simile a infermiere, deve assegnare il letto.
+        --    Si deve implementare un metodo per fargli accedere ad una schermata(nuova pagina o non)
+        --    e gli deve assegnare il letto in base al tipo di malattia che ha. 
+        --    L'unica differenza all'infermiere è che non può vedere i letti occupati ma solo quelli liberi e assegnare il posto, non toglierlo. 
+        --    L'infermiere potrà vedere, dopo le oppurtune modifiche, la persona a cui è asseganto e i documenti allegati(tramite query i guess)
+        -->
+        <?php for($i=0; $i<sizeof($reparti); $i++) : ?>
+        <div class='reparto-box' onclick="window.location.href='/src/BackBone_Phoenix/Infermiere/reparto-infermiere.php?id_reparto=<?= htmlspecialchars($reparti[$i]) ?>';">
+          Reparto N°<?= htmlspecialchars($reparti[$i]) ?>
+        </div>
+
+    <?php endfor; ?>
     <?php endif; ?>
 
     </script>

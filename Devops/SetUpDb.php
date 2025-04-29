@@ -99,6 +99,7 @@ if ($conn2->query($sql)) {
 $sql = " CREATE TABLE IF NOT EXISTS Letto (
     id_letto INT(6) NOT NULL,
     isTaken BOOLEAN NOT NULL,
+    cf_Paziente VARCHAR(20) DEFAULT NULL,
     CONSTRAINT ChiavePrimariaLetto PRIMARY KEY(id_letto)
 );";
 
