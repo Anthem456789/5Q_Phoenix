@@ -352,24 +352,23 @@ if ($conn2->query($sql)) {
 
 /* ---------------------------------------------------- */
 
-$sql = "INSERT IGNORE INTO Patologia (id_malattia) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10);
-";
+$sql = "INSERT IGNORE INTO Patologia (id_malattia, nome) VALUES
+(1, 'Tumore'),
+(2, 'Lucemia'),
+(3, 'Sindrome di Down'),
+(4, 'Epilessia'),
+(5, 'Asma'),
+(6, 'Tubercolosi'),
+(7, 'Sindrome di Turner'),
+(8, 'Sindrome di Rett'),
+(9, 'Sindrome di Asperger'),
+(10, 'Lebbra');";
 
 
 if ($conn2->query($sql)) {
     echo "Dati \"Patologia\" creati con successo<br>";
 } else {
-    echo $conn->error;
+    echo $conn2->error;
 }
 
 /* ---------------------------------------------------- */
