@@ -100,7 +100,10 @@ $sql = " CREATE TABLE IF NOT EXISTS Letto (
     id_letto INT(6) NOT NULL,
     isTaken BOOLEAN NOT NULL,
     cf_Paziente VARCHAR(20) DEFAULT NULL,
-    CONSTRAINT ChiavePrimariaLetto PRIMARY KEY(id_letto)
+    CONSTRAINT ChiavePrimariaLetto PRIMARY KEY(id_letto),
+    CONSTRAINT FK_Paziente_cf FOREIGN KEY (cf_Paziente)
+        REFERENCES utenti(codiceFiscale)
+
 );";
 
 

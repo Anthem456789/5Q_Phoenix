@@ -27,7 +27,7 @@ if (!empty($q)) {
 
     if ($result->num_rows > 0) {
         while ($riga = $result->fetch_assoc()) {
-            echo "ID Documento: ". $riga["id_documento"] . ", contenuto: " . $riga["contenuto"] .". Malattia del paziente: ".$riga["nome"]. "<br>";
+            echo "ID Documento: ". $riga["id_documento"] . ", contenuto: " . $riga["contenuto"] .". Malattia del paziente: ".$riga["nome"]. ", Codice Fiscale:".$riga["codiceFiscale"]. "<br>";
         }
     } else {
         echo "Nessun documento trovato.";
