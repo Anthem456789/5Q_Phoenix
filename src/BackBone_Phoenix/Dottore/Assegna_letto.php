@@ -26,6 +26,8 @@ $conn = new mysqli("localhost", "root", "", "5q_ombrello_phoenix");
 </p>
 
 <!-- Primo select (Reparto) -->
+<form action = "inserisciCartella.php" method="post">
+
 <select name="reparto" id="campo1" required>
     <option value="">Seleziona un reparto</option>
     <?php 
@@ -40,6 +42,22 @@ $conn = new mysqli("localhost", "root", "", "5q_ombrello_phoenix");
     <option value="">Seleziona un letto</option>
 </select>
 
+<!-- terzo input (fisco) -->
+<input name="codicefiscale" id="campo3" placeholder="Codice Fiscale" required disabled></input>
+
+<button>Inserisci</button>
+
+</form>
+
+<?php if(isset($_GET['error'])) { ?>
+        <p class="error"><?php echo $_GET['error']; ?></p>
+        <?php } ?>
+
+        <?php
+ if(isset($_GET['success'])) { ?>
+        <p class="success"><?php echo $_GET['success']; ?></p>
+        <?php } ?>
+        
 <script type="text/javascript">
 function mostra(str) {
     if (str.length == 0) {
@@ -76,30 +94,41 @@ function mostra(str) {
                 method: 'GET',
                 data: { reparto_id: id_reparto },
                 success: function(data) {
-    console.log('Risposta del server:', data);
+                console.log('Risposta del server:', data);
 
-            // Verifica la risposta ricevuta
-            if (typeof data === 'string') {
-            try {
-                // Tenta di fare il parsing se è una stringa
-                data = JSON.parse(data);
-            } catch (e) {
-                console.error('Errore nel parsing del JSON:', e);
-            }
-        }
+                // Verifica la risposta ricevuta
+                if (typeof data === 'string') {
+                    try {
+                        // Tenta di fare il parsing se è una stringa
+                        data = JSON.parse(data);
+                        } catch (e) {
+                            console.error('Errore nel parsing del JSON:', e);
+                        }
+                }
 
-    if (Array.isArray(data) && data.length > 0 ) {
-        // Svuota il campo2 prima di aggiungere le nuove opzioni
-        $('#campo2').html('<option value="">Seleziona un letto</option>');
+                if (Array.isArray(data) && data.length > 0 ) {
+                    // Svuota il campo2 prima di aggiungere le nuove opzioni
+                    $('#campo2').html('<option value="">Seleziona un letto</option>');
 
-        // Itera sui letti ricevuti
-        $.each(data, function(index, letto) {
-            $('#campo2').append('<option value="' + letto.id + '">' + "Letto" + letto.id + '</option>');
-        });
-    } else {
-        $('#campo2').html('<option value="">Nessun letto disponibile</option>');
-    }
-},
+                    // Itera sui letti ricevuti
+                    $.each(data, function(index, letto) {
+                         $('#campo2').append('<option value="' + letto.id + '">' + "Letto" + letto.id + '</option>');
+                     });
+
+                     $('#campo2').change(function() {
+                         var id_letto = $(this).val();
+
+                     if (id_letto != ""){
+                        $('#campo3').prop('disabled', false);
+                    }else {
+                        $('#campo3').prop('disabled', true);
+                    } 
+                     })
+                    
+                } else {
+                    $('#campo2').html('<option value="">Nessun letto disponibile</option>');
+                }
+            },
                 error: function() {
                     alert("Si è verificato un errore nel recupero dei letti.");
                 }

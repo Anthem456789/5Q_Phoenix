@@ -160,9 +160,7 @@ if ($stmt = $conn->prepare($sql)) {
     </nav>
 
 
-    <div id="content" class="riquadri">
-
-    </div>
+    <div id="content" class="riquadri"></div>
 
 
 </body>
