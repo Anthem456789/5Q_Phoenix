@@ -45,7 +45,7 @@ include_once "../Generale/Db.php";
 
     if ($id_reparto > 0) {
 
-        $sql3 = "SELECT DISTINCT T.id_letto, Y.isTaken
+        $sql3 = "SELECT DISTINCT T.id_letto, Y.isTaken, Y.cf_Paziente
                     FROM reparto_letto AS T
                     JOIN letto AS Y 
                     ON T.id_letto = Y.id_letto
@@ -65,11 +65,14 @@ include_once "../Generale/Db.php";
                 echo "<div class= 'letto-box'>";
                 echo "ID letto: " . $row3['id_letto'] . " >>> Reparto: " . $id_reparto . "<br>";
 
+                /* Inserire opzione per spostare i pazienti */
                 if ($row3['isTaken'] == 1) {
                     echo "<button id='btn-{$row3['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row3['id_letto']}', 0)\">Rilascia</button><br>";
-                } else {
+                } 
+                /*else {
                     echo "<button id='btn-{$row3['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row3['id_letto']}', 1)\">Assegna</button><br>";
-                }
+                } 
+            */
                 echo "</div>";
             }
             echo "</div>";

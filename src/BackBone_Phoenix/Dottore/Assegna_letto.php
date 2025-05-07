@@ -16,12 +16,12 @@ $conn = new mysqli("localhost", "root", "", "5q_ombrello_phoenix");
     </div>
 <?php endfor; ?>
     
-<p><b>Doc da cercare:</b></p>
+<p><b>Documento da cercare:</b></p>
 <form>
     nome: <input type="text" onkeyup="mostra(this.value)">
 </form>
 
-<p>Doc suggeriti: 
+<p>Documento suggeriti: 
     <div class="box" id="elenco"></div>
 </p>
 

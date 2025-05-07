@@ -10,7 +10,9 @@ if (isset($_POST["reparto"]) && isset($_POST["letto"]) && isset($_POST["codicefi
     $codiceFiscale = $_POST["codicefiscale"];
     
     // Update the bed with the patient's CF
-    $stmt = $conn->prepare("UPDATE letto SET cf_paziente = ? WHERE id_letto = ?");
+    //Controllo codice fiscale duplicato in altri letti -> da fare 
+    //isTaken = 1^isTaken cambia la value del boolean all'opposto -> 0 = 1 ; 1 = 0
+    $stmt = $conn->prepare("UPDATE letto SET cf_paziente = ? , isTaken = 1^isTaken  WHERE id_letto = ?");
     $stmt->bind_param("si", $codiceFiscale, $id_letto);
 
     if ($stmt->execute()) {

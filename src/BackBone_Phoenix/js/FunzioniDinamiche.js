@@ -133,7 +133,7 @@ function gestisciLetti(idLetto, newStatus) {
                 if (button) {
                     if (newStatus == 1) {
                         button.textContent = "Rilascia";
-                        button.setAttribute('onclick', `gestisciLetti('${idLetto}', 0)`);
+                        button.setAttribute('onclick', `gestisciLetti('${idLetto}', 0`);
                         inviaNotificaInfermiere(CodiceFiscale, categoria, titolo, descrizione);
                     } else {
                         button.textContent = "Assegna";
