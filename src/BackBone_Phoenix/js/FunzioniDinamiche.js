@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (ruoloUtente === 'Paziente') {
         gestisciPrenotazionePaziente();
     } else if (ruoloUtente === 'Infermiere') {
-        gestisciLetti(idLetto, newStatus);
+        //gestisciLetti(idLetto, newStatus);
     }
 });
 
