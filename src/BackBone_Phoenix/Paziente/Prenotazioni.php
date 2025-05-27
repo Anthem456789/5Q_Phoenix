@@ -46,7 +46,7 @@ $codiceFiscale = $_SESSION["codiceFiscale"];
         </div>
     </div>
 
-    <script src="../js/FunzioniDinamiche.js" defer></script>
+    <script src="../js/Funzioni_Paziente.js" defer></script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {

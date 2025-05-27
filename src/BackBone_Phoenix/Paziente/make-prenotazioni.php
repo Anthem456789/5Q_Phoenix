@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
        if ($stmt->execute()) {
            echo json_encode(['success' => 'Prenotazione inserita con successo!']);
+           
        } else {
            echo json_encode(['error' => 'Errore durante l\'inserimento: ' . $stmt->error]);
        }

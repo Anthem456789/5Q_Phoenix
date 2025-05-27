@@ -69,6 +69,7 @@ if ($stmt = $conn->prepare($sql)) {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="ruolo-utente" content="<?= htmlspecialchars($_SESSION['ruolo']) ?>">
     <title>Home</title>
     <!-- Link al css da redifinire successivamente-->
     <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/css/Grafica.css?<?php echo time(); ?>">
@@ -102,7 +103,7 @@ if ($stmt = $conn->prepare($sql)) {
             <div class="menu">
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="Home.php">
                             <i class='bx bx-home-smile icona'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -160,7 +161,18 @@ if ($stmt = $conn->prepare($sql)) {
     </nav>
 
 
-    <div id="content" class="riquadri"></div>
+    <div id="content" class="riquadri">
+        <?php
+         if ($_SESSION['ruolo'] == "Paziente") {
+            $sql = "SELECT id_reparto, codiceFiscale, data_ora, id FROM prenotazioni"; 
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                echo $row["id_reparto"] . " " . $row["codiceFiscale"] . " " . $row["data_ora"] . "<br>"; 
+            }
+        }
+        
+        ?>
+    </div>
 
 
 </body>

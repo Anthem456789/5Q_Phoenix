@@ -31,7 +31,7 @@ $conn = new mysqli($host, $username, $password, $dbname);
     if (isset($_SESSION["codiceFiscale"])) {
         
             
-        if($_SESSION["ruolo"] == "Infermiere"){
+        if($_SESSION["ruolo"] == "Infermiere") {
             /* Prende il ruolo  dell'utente loggato basandosi sul suo codice fiscale*/
             $sql = " SELECT categoria,titolo,descrizione,data_creazione,visualizzato
                 FROM Notifica
@@ -39,7 +39,7 @@ $conn = new mysqli($host, $username, $password, $dbname);
             ";
         }
 
-        if($_SESSION["ruolo"] == "Paziente"){
+        if($_SESSION["ruolo"] == "Paziente") {
             /* Prende il ruolo  dell'utente loggato basandosi sul suo codice fiscale*/
             $sql = " SELECT categoria,titolo,descrizione,data_creazione,visualizzato
                 FROM Notifica
@@ -47,7 +47,7 @@ $conn = new mysqli($host, $username, $password, $dbname);
             ";
         }
 
-        if($_SESSION["ruolo"] == "Dottore"){
+        if($_SESSION["ruolo"] == "Dottore") {
             /* Prende il ruolo  dell'utente loggato basandosi sul suo codice fiscale*/
             $sql = " SELECT categoria,titolo,descrizione,data_creazione,visualizzato
                 FROM Notifica
