@@ -1,12 +1,13 @@
 <?php
 
-include "../../functionLog.php";
-include_once "../Generale/Db.php";
+    include "../../functionLog.php" ; 
+    include_once "../Generale/Db.php" ; 
 
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="ruolo-utente" content="<?php echo $_SESSION['ruolo']; ?>">
@@ -62,7 +63,9 @@ include_once "../Generale/Db.php";
                     
                     echo "<button id='apriOpzioni-{$row3['id_letto']}' class='Cambia-btn'>Opzioni</button>";
                 } else if($row3['isTaken'] == 0) {
-                    echo "<button id='btn-{$row3['id_letto']}' class='Cambia-btn' onclick=\"gestisciLetti('{$row3['id_letto']}', 1)\">Assegna</button><br>";
+                    echo "<button id='btn-{$row3['id_letto']}' class='Cambia-btn assegna-btn' data-id='{$row3['id_letto']}'>Assegna</button><br>";
+
+                    echo "<button id='apriOpzioni-{$row3['id_letto']}' class='Cambia-btn'>Opzioni</button>";
                 }
                 echo "</div>";
             }
@@ -73,91 +76,106 @@ include_once "../Generale/Db.php";
 
     ?>
 
-    <!-- Riquadro a comparsa -->
-    <div id="popup" class="popup">
+    <!-- Riquadro a comparsa per pulsante Rilascia -->
+    <div id="popup_rilascia" class="popup">
         <div class="popup-content">
             <span id="closeBtn" class="close-btn">&times;</span>
-            <p id="popupMessage">Questo è un riquadro a comparsa!</p>
+            <form id="Inserimento_cf">
+                <input type="hidden" id="id_letto" name="id_letto">
+                <input type="text" id="cf_paziente" name="cf_paziente" placeholder="Codice Fiscale" required>
+                <button>Invia</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Riquadro a comparsa per pulsante opzioni -->
+    <div id="popup_opzioni" class="popup">
+        <div class="popup-content">
+            <span id="closeBtn" class="close-btn">&times;</span>
+            <p id="popupMessage_opzioni">Questo è un riquadro a comparsa!</p>
         </div>
     </div>
 
 </body>
 
-<script src="../js/FunzioniDinamiche.js" defer></script>
+<script src="../js/Funzioni_infermiere.js" defer></script>
 <script>
-
 function openPopup(lettId) {
-    const popup = document.getElementById('popup');
-    const popupMessage = document.getElementById('popupMessage');
+    const popup = document.getElementById('popup_opzioni');
+    const popupMessage = document.getElementById('popupMessage_opzioni');
 
 
     popup.style.display = 'flex';
 
-   
+
     fetch('getInfo.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'id_letto=' + lettId
-    })
-    .then(response => response.text())  
-    .then(text => {
-        console.log('Risposta del server:', text);  
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'id_letto=' + lettId
+        })
+        .then(response => response.text())
+        .then(text => {
+            console.log('Risposta del server:', text);
 
-        try {
-            
-            const data = JSON.parse(text);
+            try {
 
-            if (data.success === true) {
-                const cf_Paziente = data.cf_Paziente;
-                let message = `<p>Codice Fiscale Paziente: ${cf_Paziente}</p>`;
+                const data = JSON.parse(text);
 
-               
-                if (data.documents && data.documents.length > 0) {
-                    let documentsMessage = '';
-                    for (let i = 0; i < data.documents.length; i++) {
-                        documentsMessage += `<p>ID Documento: ${data.documents[i].id_documento} | Contenuto: ${data.documents[i].contenuto}</p>`;
+                if (data.success === true) {
+                    const cf_Paziente = data.cf_Paziente;
+                    let message = `<p>Codice Fiscale Paziente: ${cf_Paziente}</p>`;
+
+
+                    if (data.documents && data.documents.length > 0) {
+                        let documentsMessage = '';
+                        for (let i = 0; i < data.documents.length; i++) {
+                            documentsMessage +=
+                                `<p>ID Documento: ${data.documents[i].id_documento} | Contenuto: ${data.documents[i].contenuto}</p>`;
+                        }
+                        message += documentsMessage;
+                    } else {
+                        message += "<p>No documents found.</p>";
                     }
-                    message += documentsMessage;
-                } else {
-                    message += "<p>No documents found.</p>";
-                }
 
-                // Imposta il contenuto del popup
-                document.getElementById('popupMessage').innerHTML = message;
-            } else if (data.error) {
-                document.getElementById('popupMessage').innerHTML = `<span style="color:red;">${data.error}</span>`;
-            } else {
-                document.getElementById('popupMessage').innerHTML = "Errore sconosciuto.";
+                     /* Imposta il contenuto del popup */
+                    document.getElementById('popupMessage_opzioni').innerHTML = message;
+                } else if (data.error) {
+                    document.getElementById('popupMessage_opzioni').innerHTML =
+                        `<span style="color:red;">${data.error}</span>`;
+                } else {
+                    document.getElementById('popupMessage_opzioni').innerHTML = "Errore sconosciuto.";
+                }
+            } catch (e) {
+                console.error('Errore nel parsing JSON:', e);
+                document.getElementById('popupMessage_opzioni').innerHTML =
+                    'Si è verificato un errore nella risposta del server.';
             }
-        } catch (e) {
-            console.error('Errore nel parsing JSON:', e);
-            document.getElementById('popupMessage').innerHTML = 'Si è verificato un errore nella risposta del server.';
-        }
-    })
-    .catch(error => {
-        console.error('Errore durante la richiesta:', error);
-        document.getElementById('popupMessage').innerHTML = 'Si è verificato un errore nella richiesta.';
-    });
+        })
+        .catch(error => {
+            console.error('Errore durante la richiesta:', error);
+            document.getElementById('popupMessage_opzioni').innerHTML =
+                'Si è verificato un errore nella richiesta.';
+        });
 }
 
 
-
-// Funzione per chiudere il riquadro a comparsa
 const closeBtn = document.getElementById('closeBtn');
 closeBtn.onclick = function() {
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('popup_opzioni');
     popup.style.display = 'none';
 }
 
-// Funzione per chiudere il riquadro cliccando fuori dal contenuto
+/* Per chiuderlo quando clicchi fuori dal contenuto */
 window.onclick = function(event) {
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('popup_opzioni');
     if (event.target === popup) {
         popup.style.display = 'none';
     }
 }
 
-// Aggiungi un listener a ciascun pulsante "Opzioni"
+/* Aggiunge un listener a ciascun pulsante "Opzioni"  */
 document.querySelectorAll('.Cambia-btn').forEach(button => {
     if (button.id.includes('apriOpzioni')) {
         // Ottieni l'ID del letto dal pulsante
@@ -167,6 +185,34 @@ document.querySelectorAll('.Cambia-btn').forEach(button => {
         });
     }
 });
+
+
+/* Per ogni pulsante con "Assegna" aggiunge un listener e prende data-id */
+document.querySelectorAll('.assegna-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const lettoId = this.getAttribute('data-id');
+        document.getElementById('id_letto').value = lettoId;
+
+        /* Apre il popup */
+        document.getElementById('popup_rilascia').style.display = 'flex';
+    });
+});
+
+const form = document.getElementById('Inserimento_cf');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const id_letto = document.getElementById('id_letto').value;
+    gestisciLetti(id_letto, 1); 
+});
+
+/* Per chiuderlo quando clicchi fuori dal contenuto */
+window.onclick = function(event) {
+    const popup = document.getElementById('popup_rilascia');
+    if (event.target === popup) {
+        popup.style.display = 'none';
+    }
+}
 </script>
 
 </html>
