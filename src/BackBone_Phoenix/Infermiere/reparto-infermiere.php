@@ -89,92 +89,82 @@
     </div>
 
     <!-- Riquadro a comparsa per pulsante opzioni -->
-    <div id="popup_opzioni" class="popup">
-        <div class="popup-content">
-            <span id="closeBtn" class="close-btn">&times;</span>
-            <p id="popupMessage_opzioni">Questo è un riquadro a comparsa!</p>
-        </div>
+<div id="popup_opzioni" class="popup">
+    <div class="popup-content">
+        <span id="closeBtn" class="close-btn">&times;</span>
+        <div id="popupMessage_opzioni"></div>
     </div>
+</div>
 
 </body>
 
-<script src="../js/Funzioni_infermiere.js" defer></script>
 <script>
-function openPopup(lettId) {
-    const popup = document.getElementById('popup_opzioni');
-    const popupMessage = document.getElementById('popupMessage_opzioni');
+document.addEventListener('DOMContentLoaded', function () {
 
+    function openPopup(lettId) {
+        const popup = document.getElementById('popup_opzioni');
+        const popupMessage = document.getElementById('popupMessage_opzioni');
+        popup.style.display = 'flex';
 
-    popup.style.display = 'flex';
+        fetch('getInfo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'id_letto=' + lettId
+            })
+            .then(response => response.text())
+            .then(text => {
+                try {
+                    const data = JSON.parse(text);
+                    let message = `<p>Codice Fiscale Paziente: ${data.cf_Paziente}</p>`;
 
-
-    fetch('getInfo.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'id_letto=' + lettId
-        })
-        .then(response => response.text())
-        .then(text => {
-            console.log('Risposta del server:', text);
-
-            try {
-
-                const data = JSON.parse(text);
-
-                if (data.success === true) {
-                    const cf_Paziente = data.cf_Paziente;
-                    let message = `<p>Codice Fiscale Paziente: ${cf_Paziente}</p>`;
-
-
-                    if (data.documents && data.documents.length > 0) {
-                        let documentsMessage = '';
-                        for (let i = 0; i < data.documents.length; i++) {
-                            documentsMessage +=
-                                `<p>ID Documento: ${data.documents[i].id_documento} | Contenuto: ${data.documents[i].contenuto}</p>`;
+                    if (data.documents?.length > 0) {
+                        for (let doc of data.documents) {
+                            message += `<p>ID Documento: ${doc.id_documento} | Contenuto: ${doc.contenuto}</p>`;
                         }
-                        message += documentsMessage;
                     } else {
                         message += "<p>No documents found.</p>";
                     }
 
-                     /* Imposta il contenuto del popup */
                     document.getElementById('popupMessage_opzioni').innerHTML = message;
-                } else if (data.error) {
+                } catch (e) {
+                    console.error('Errore parsing JSON:', e);
                     document.getElementById('popupMessage_opzioni').innerHTML =
-                        `<span style="color:red;">${data.error}</span>`;
-                } else {
-                    document.getElementById('popupMessage_opzioni').innerHTML = "Errore sconosciuto.";
+                        'Errore nella risposta del server.';
                 }
-            } catch (e) {
-                console.error('Errore nel parsing JSON:', e);
+            })
+            .catch(error => {
+                console.error('Errore fetch:', error);
                 document.getElementById('popupMessage_opzioni').innerHTML =
-                    'Si è verificato un errore nella risposta del server.';
-            }
-        })
-        .catch(error => {
-            console.error('Errore durante la richiesta:', error);
-            document.getElementById('popupMessage_opzioni').innerHTML =
-                'Si è verificato un errore nella richiesta.';
-        });
-}
-
-
-const closeBtn = document.getElementById('closeBtn');
-closeBtn.onclick = function() {
-    const popup = document.getElementById('popup_opzioni');
-    popup.style.display = 'none';
-}
-
-/* Per chiuderlo quando clicchi fuori dal contenuto */
-window.onclick = function(event) {
-    const popup = document.getElementById('popup_opzioni');
-    if (event.target === popup) {
-        popup.style.display = 'none';
+                    'Errore nella richiesta.';
+            });
     }
-}
 
+    document.getElementById('closeBtn').onclick = function () {
+        document.getElementById('popup_opzioni').style.display = 'none';
+    };
+
+    window.onclick = function (event) {
+        const popup = document.getElementById('popup_opzioni');
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    };
+
+    document.querySelectorAll('.Cambia-btn').forEach(button => {
+        if (button.id.includes('apriOpzioni')) {
+            const lettoId = button.id.split('-')[1];
+            button.addEventListener('click', function () {
+                openPopup(lettoId);
+            });
+        }
+    });
+
+});
+</script>
+
+<script>
 /* Aggiunge un listener a ciascun pulsante "Opzioni"  */
 document.querySelectorAll('.Cambia-btn').forEach(button => {
     if (button.id.includes('apriOpzioni')) {
@@ -214,5 +204,7 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+<script src="../js/Funzioni_infermiere.js"></script>
 
 </html>

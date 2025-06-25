@@ -143,12 +143,7 @@ if ($stmt = $conn->prepare($sql)) {
                                     </span>
                                 </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-smile icona'></i>
-                            <span class="text nav-text">Lorem ipsum</span>
-                        </a>
-                    </li>
+
                     <li class="nav-link">
                         <a href="Logout.php" class="Button">
                             <i class='bx bx-home-smile icona'></i>
@@ -163,12 +158,19 @@ if ($stmt = $conn->prepare($sql)) {
 
     <div id="content" class="riquadri">
         <?php
+       
          if ($_SESSION['ruolo'] == "Paziente") {
+            
             $sql = "SELECT id_reparto, codiceFiscale, data_ora, id FROM prenotazioni"; 
             $result = $conn->query($sql);
+
+             echo "<div class= 'Container_Dashboard_Home-riquadro'>";
             while ($row = $result->fetch_assoc()) {
-                echo $row["id_reparto"] . " " . $row["codiceFiscale"] . " " . $row["data_ora"] . "<br>"; 
+                echo "<div class= 'Dashboard_Home-riquadro'>";
+                echo  "Reparto:" . " ". $row["id_reparto"] . ". Utente: " . $row["codiceFiscale"] . ". All'orario: " . $row["data_ora"] . "<br>";
+                echo "</div>";
             }
+             echo "</div>";
         }
         
         ?>

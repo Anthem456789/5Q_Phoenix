@@ -3,7 +3,7 @@
 <html>
   <head> 
    <title> REGISTRAZIONE </title>
-   <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/GraficaForm.css?<?php echo time(); ?>">
+   <link rel="stylesheet" type="text/css" href="BackBone_Phoenix/css/GraficaForm.css?<?php echo time(); ?>">
   </head>
  
 <body>

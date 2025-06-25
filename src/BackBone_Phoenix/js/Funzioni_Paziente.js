@@ -18,8 +18,8 @@ function gestisciPrenotazionePaziente(ruoloUtente) {
         const orario = document.getElementById('orario').value.trim();
         /* Non prende il contenuto */
         const categoria = ruoloUtente;
-        const titolo = "Prenotazione si!";
-        const descrizione = "pute!";
+        const titolo = "Prenotazione effettuata con successo!";
+        const descrizione = "Confermato per il reparto " + reparto + " con orario " + orario + ".";
 
     
         if (!codiceFiscale || !reparto) {

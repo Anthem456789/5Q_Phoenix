@@ -36,7 +36,7 @@ echo $_SESSION["ruolo"] . "<br><br>";
     *  Si passa id reparto tramite URI (Protocollo REST) al reparto-infermiere
     -->
     <?php for($i=0; $i<sizeof($reparti); $i++) : ?>
-        <div class='reparto-box' onclick="window.location.href='/src/BackBone_Phoenix/Infermiere/reparto-infermiere.php?id_reparto=<?= htmlspecialchars($reparti[$i]) ?>';">
+        <div class='reparto-box' onclick="window.location.href='../src/BackBone_Phoenix/Infermiere/reparto-infermiere.php?id_reparto=<?= htmlspecialchars($reparti[$i]) ?>';">
           Reparto N°<?= htmlspecialchars($reparti[$i]) ?>
     </div>
 

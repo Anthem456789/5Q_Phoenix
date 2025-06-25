@@ -99,7 +99,7 @@ body {
     padding: 10px 14px;
     background-color: #93ff9f;
     border-right: 2px solid #2a592f;
-    box-shadow: 0 53px 15px #fad637;
+    box-shadow: 0 53px 15px #111111;
 }
 
 .sidebar li {
@@ -192,7 +192,24 @@ header .image-text .tipo {
     color: #ffffff;
 }
 
+.Container_Dashboard_Home-riquadro{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    /* Spaziatura interna del contenitore */
+}
 
+.Dashboard_Home-riquadro {
+
+    /* Riciclata da .letto-box */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Effetto ombra */
+}
 
 .riquadri {
     position: absolute;
@@ -252,9 +269,12 @@ header .image-text .tipo {
 }
 
 .Cambia-btn {
-    padding: 5px 10px;
+  margin-top: 5px;
+    margin-right: 5px; /* Spazio tra i bottoni se affiancati */
+    margin-bottom: 5px;
+    padding: 6px 12px;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
@@ -435,29 +455,29 @@ header .image-text .tipo {
 .popup {
     display: none;
     position: fixed;
-    left: 0;
-    top: 0;
+    top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* sfondo semi-trasparente */
+    background-color: rgba(0,0,0,0.5); /* sfondo scuro trasparente */
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 /* Contenuto del riquadro a comparsa */
 .popup-content {
-    background-color: white;
+    background: white;
     padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 80%;
+    position: relative;
 }
 
 /* Pulsante di chiusura */
 .close-btn {
-    font-size: 30px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 10px; right: 15px;
+    font-size: 24px;
     cursor: pointer;
 }
